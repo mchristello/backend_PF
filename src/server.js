@@ -87,8 +87,8 @@ const io = new Server(httpServer) // Se crea el servidor Socket
 socket(io)
 
 app.use('/api/logger', loggerRouter)
-app.use('/api/carts', cartRouter);
-app.use('/api/products', productRouter);
+app.use('/api/carts', passportCall('jwt'), cartRouter);
+app.use('/api/products', passportCall('jwt'), productRouter);
 app.use('/api/users', passportCall('jwt'), apiUsersRouter);
 app.use('/api/mockingproducts', mockingRouter);
 app.use('/', viewsRouter)

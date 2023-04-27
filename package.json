@@ -1,5 +1,5 @@
 {
-  "name": "desafio13_testing",
+  "name": "backend_pf",
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
@@ -9,7 +9,7 @@
     "start": "node src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matias Christello",
   "license": "ISC",
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
