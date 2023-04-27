@@ -1,0 +1,41 @@
+fatal: FATAL ERROR
+error: error on DB
+warning: Dont worry, it's just warning
+error: From resgisterPost: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+fatal: FATAL ERROR
+error: error on DB
+warning: Dont worry, it's just warning
+error: undefined {"_message":"products validation failed","errors":{"owner":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONTypeError\"","name":"CastError","path":"owner","reason":{},"stringValue":"\"admin\"","value":"admin","valueType":"string"}}}
+error: undefined {"_message":"products validation failed","errors":{"owner":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONTypeError\"","name":"CastError","path":"owner","reason":{},"stringValue":"\"admin\"","value":"admin","valueType":"string"}}}
+error: undefined {"_message":"products validation failed","errors":{"owner":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONTypeError\"","name":"CastError","path":"owner","reason":{},"stringValue":"\"admin\"","value":"admin","valueType":"string"}}}
+error: undefined {"_message":"products validation failed","errors":{"owner":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONTypeError\"","name":"CastError","path":"owner","reason":{},"stringValue":"\"admin\"","value":"admin","valueType":"string"}}}
+error: undefined {"_message":"products validation failed","errors":{"owner":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONTypeError\"","name":"CastError","path":"owner","reason":{},"stringValue":"\"admin\"","value":"admin","valueType":"string"}}}
+error: undefined {"_message":"products validation failed","errors":{"owner":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONTypeError\"","name":"CastError","path":"owner","reason":{},"stringValue":"\"admin\"","value":"admin","valueType":"string"}}}
+error: undefined {"_message":"products validation failed","errors":{"owner":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONTypeError\"","name":"CastError","path":"owner","reason":{},"stringValue":"\"admin\"","value":"admin","valueType":"string"}}}
+error: undefined {"_message":"products validation failed","errors":{"owner":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONTypeError\"","name":"CastError","path":"owner","reason":{},"stringValue":"\"admin\"","value":"admin","valueType":"string"}}}
+error: products validation failed: owner: Cast to ObjectId failed for value "admin" (type string) at path "owner" because of "BSONTypeError" + /products/addNew
+error: products validation failed: owner: Cast to ObjectId failed for value "admin" (type string) at path "owner" because of "BSONTypeError" + /products/addNew
+error: products validation failed: owner: Cast to ObjectId failed for value "admin" (type string) at path "owner" because of "BSONTypeError" at URL: /products/addNew
+error: products validation failed: owner: Cast to ObjectId failed for value "admin" (type string) at path "owner" because of "BSONTypeError" at URL: /products/addNew
+error: E11000 duplicate key error collection: ecommerce.products index: code_1 dup key: { code: null } at URL: /products/addNew
+error: E11000 duplicate key error collection: ecommerce.products index: code_1 dup key: { code: null } at URL: /products/addNew
+error: req is not defined at URL: /products/addNew
+error: E11000 duplicate key error collection: ecommerce.products index: code_1 dup key: { code: "" }
+error: E11000 duplicate key error collection: ecommerce.products index: code_1 dup key: { code: "" }
+error: E11000 duplicate key error collection: ecommerce.products index: code_1 dup key: { code: "" }
+error: req is not defined
+error: req is not defined at URL: /643eb094578775a7fc17a5c0
+error: req is not defined at URL: /643eb094578775a7fc17a5c0
+error: req is not defined
+error: req is not defined
+error: products validation failed: owner: Cast to ObjectId failed for value "admin" (type string) at path "owner" because of "BSONTypeError"
+error: products validation failed: owner: Cast to ObjectId failed for value "admin" (type string) at path "owner" because of "BSONTypeError"
+error: result is not defined
+error: data.push is not a function
