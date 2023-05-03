@@ -8,6 +8,7 @@ export default {
     URL: process.env.URL,
     TRANSPORT_USER: process.env.TRANSPORT_USER,
     TRANSPORT_PASS: process.env.TRANSPORT_PASS,
+    GOOGLE_TRANSPORT_PASS: process.env.GOOGLE_TRANSPORT_PASS,
     PERSISTENCE: process.env.PERSISTENCE,
     MONGO_URL: process.env.MONGO_URL,
     DB_NAME: process.env.DB_NAME,

@@ -214,10 +214,15 @@ export const modifyRol = async (req, res) => {
     try {
         const uid = req.params.uid
 
-        const newRol = await UsersService.modifyRol(uid)
         const user = await UsersService.getById(uid)
+        if(user.rol !== 'user' || user.rol !== 'premium') {
+            return res.status(403).send({ status: 'error', message: 'No se puede actulizar el rol del usuario' });
+        }
 
-        return res.status(200).send({ status: 'success', payload: user });
+        const newRol = await UsersService.modifyRol(uid)
+        const updatedUser = await UsersService.getById(uid)
+
+        return res.status(200).send({ status: 'success', payload: updatedUser });
 
     } catch (error) {
         CustomError.createError({
@@ -226,5 +231,24 @@ export const modifyRol = async (req, res) => {
             message: `Problema en UserController, endpoint: ${req.url}.`,
             code: ERRORS.GENERAL_ERROR
         })
+        return res.status(500).send({ status: 'error', error: error.message });
+    }
+}
+
+// TODO: Completar funcionalidad para subir archivos.
+export const uploadDocs = async (req, res) => {
+    try {
+        const uid = req.params
+
+        return res.status(200).send({ status: 'success', payload: `Endpoint para subir archivos del User.` });
+        
+    } catch (error) {
+        CustomError.createError({
+            name: 'Catch in uploadDocs, User.Controller',
+            cause: generateGeneralError(),
+            message: `Problema en UserController, endpoint: ${req.url}.`,
+            code: ERRORS.GENERAL_ERROR
+        })
+        return res.status(500).send({ status: 'error', error: error.message })
     }
 }

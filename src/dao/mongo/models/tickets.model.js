@@ -26,9 +26,9 @@ const ticketSchema = new mongoose.Schema({
     purchaser: String,
 });
 
-// ticketSchema.set("timestamps", {
-//     createdAt: "purchased_datetime",
-// });
+ticketSchema.set("timestamps", {
+    createdAt: "purchased_datetime",
+});
 
 
 export const TicketModel = mongoose.model(ticketCollection, ticketSchema);

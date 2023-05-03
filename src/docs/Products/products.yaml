@@ -99,7 +99,7 @@ paths:
           description: Error en el servidor. No se pudieron obtener los datos.
 components:
   schemas:
-    Product:
+    products:
       type: object
       properties:
         _id:

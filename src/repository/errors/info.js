@@ -26,7 +26,7 @@ export const generateAuthenticationError = (user) => {
             - ${user.email}, las credenciales no son correctas, por favor revise y vuelva a ingresarlas..`
 }
 
-export const generateSutorizationError = (user) => {
+export const generateAutorizationError = (user) => {
     return `Ha ocurrido un problema al de permisos:
             - ${user.email} no dispone de los permisos para el endpoint solicitado.`
 }

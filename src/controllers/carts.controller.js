@@ -54,7 +54,6 @@ export const addProduct = async(req, res) => {
         const cid = req.params.cid;
         const pid = req.params.pid;
         const user = req.session.user;
-        console.log(cid, pid, user);
         
         const result = await CartsService.addProduct(cid, pid, user);
         const actualizedCart = await CartsService.getCartById(cid);
@@ -62,7 +61,7 @@ export const addProduct = async(req, res) => {
         return res.status(200).send({ status: 'success', payload: actualizedCart });
 
     } catch (error) {
-        console.log(error)
+        req.logger.error(error)
         return res.status(400).send({ status: 'error', error: error.message });
     }
 }
@@ -100,13 +99,12 @@ export const purchase = async (req, res) => {
         const cid = req.params.cid;
         const user = req.session.user
 
-
         const result = await CartsService.purchase(cid, user.email);
         req.logger.debug(`RESULT FROM PURCHASE: `, result);
 
         const cart = await CartModel.findOne({_id: cid });
 
-        req.logger.debug(`CART AFTER THE PURCHASE: `, cart);
+        req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
         return res.status(200).send({ status: 'success', payload: result })
 
     } catch (error) {

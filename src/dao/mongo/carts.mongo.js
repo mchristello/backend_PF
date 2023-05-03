@@ -3,7 +3,7 @@ import UserModel from "./models/users.model.js";
 import { TicketModel } from "./models/tickets.model.js";
 import Products from "./products.mongo.js";
 import CustomError from "../../repository/errors/custom.error.js";
-import { generateGeneralError, generateNotFoundError } from "../../repository/errors/info.js";
+import { generateAutorizationError, generateGeneralError, generateNotFoundError } from "../../repository/errors/info.js";
 import ERRORS from "../../repository/errors/enums.js";
 
 const productsService = new Products();
@@ -32,7 +32,10 @@ export default class Carts {
 
     addProduct = async(cartId, productId, user) => {
         const data = { cartId, productId, user };
+        // console.log(`CARTID IN CARTMONGO --->`, cartId);
+
         const findCart = await CartModel.findOne({ _id: cartId });
+        console.log(`CARRITO BUSCADO DESDE CART.MONOG ----> `, JSON.stringify(findCart, null, 2, `\t`));
 
         if(findCart === null) {
             const newCart = await this.createCart(data)
@@ -45,14 +48,29 @@ export default class Carts {
             return newCart;
         }
         
-        const findProduct = await CartModel.findOne({ 'products.product': productId });
-        if(findProduct) {
-            const updateQty = await CartModel.updateOne({ 'products.product': productId }, { $inc: { 'products.$.quantity': 1 }});
+        // const findProduct = await CartModel.findOne({ _id: cartId}, { 'products.product': productId });
 
-            return updateQty;
+        const findProduct = findCart.products.find(p => p.product.id === productId)
+        console.log(`FINDPRODUCT FROM CARTMONGO: `, JSON.stringify(findProduct, null, 2, `\t`));
+        
+        if(findProduct) {
+            if (findProduct.owner == user._id) {
+                CustomError.createError({
+                    name: `Delete error in carts.mongo.js`,
+                    cause: generateAutorizationError(pid),
+                    message: `Problema tratando de agregar el producto ID: ${productId}`,
+                    code: ERRORS.AUTHORIZATION_ERROR
+                })
+            }
+            // findProduct.quantity = findProduct.quantity + 1
+            const updateQty = await CartModel.updateOne({ 'products.product': productId }, { $inc: { 'products.$.quantity': 1 }});
+            console.log(`FINDPRODUCT FROM CARTMONGO CONDITIONAL: `, updateQty);
+
+            return findProduct;
         }
 
         findCart.products.push({ product: productId, quantity: 1 });
+        console.log(`FINDCART IN CARTMONGO ---> `, JSON.stringify(findCart, null, 2, `\t`));
 
         let result = await CartModel.updateOne({ _id: cartId }, findCart)
 
@@ -60,11 +78,7 @@ export default class Carts {
     }
 
     deleteProduct = async(cid, pid) => {
-        console.log(cid);
-        console.log(pid);
-
         const deleteProduct = await CartModel.updateOne({ _id: cid }, { $pull: { products: { product: pid }}});
-        console.log(deleteProduct);
 
         if(deleteProduct === undefined) {
             CustomError.createError({
@@ -114,8 +128,6 @@ export default class Carts {
 
         const total = await this.updateStock(cid, products);
         const acc = total.reduce((acc, acum) => acc + acum, 0)
-
-        console.log(`THIS IS TOTAL FROM PURCHASE`, acc);
 
         const newTicket = await this.newTicket(user.email, acc);
 

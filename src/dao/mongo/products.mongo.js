@@ -69,13 +69,12 @@ export default class Products {
 
     updateStock = async (pid, quantity) => {
         const product = await this.find(pid);
-        console.log(`THIS IS PRODUCT FROM UPDATESTOCK: `, product);
 
         if (product.stock < quantity) {
             CustomError.createError({
                 name: `Stock Error`,
                 cause: generateNoStockError(pid, quantity),
-                message: `Problema con stock al agregar al carrito`,
+                message: `Not enought stock of the product ${pid} to complete your purchase`,
                 code: ERRORS.NO_STOCK_ERROR
             })    
         }

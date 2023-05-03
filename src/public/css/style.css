@@ -55,7 +55,7 @@ a:hover {
     text-align: center;
     text-decoration: underline;
     margin: 2rem auto;
-    width: 40vw;
+    width: fit-content;
     color: snow;
     background: #ffffff33;
     box-shadow: 0 8px 32px 0 #1f26875e;
@@ -84,7 +84,7 @@ a:hover {
     font-size: 2rem;
     text-align: center;
     margin: 2rem auto;
-    color: #393a35;
+    color: #eef1e2;
     background: #ffffff33;
     box-shadow: 0 8px 32px 0 #1f26875e;
     backdrop-filter: blur( 6px );
@@ -237,13 +237,8 @@ p {
 }
 
 /* LOGIN */
-.login-container {
-    display: flex;
-    flex-direction: column;
-}
-
 .form_login {
-    background-color: #c7fb93;
+    background-color: #f0dfbee0;
     padding: 2rem;
     border-radius: 20px;
     margin-top: 5rem;
@@ -251,9 +246,19 @@ p {
 }
 
 .form_login--reset {
-    background-color: #c7fb93;
+    background-color: #f0dfbee0;
     padding: 4rem;
     border-radius: 20px;
     margin-top: 2rem;
     width: 50vw;
+}
+
+/* TABLE STYLE */
+.table {
+    border: 5px inset rgb(131, 131, 206);
+    border-radius: 10rem;
+}
+
+.table--total_row {
+    border: 4px inset rgb(8, 131, 28);
 }

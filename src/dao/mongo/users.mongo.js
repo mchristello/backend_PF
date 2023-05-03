@@ -47,7 +47,7 @@ export default class Users {
         }
     }
 
-    // TODO: Revisar esto...
+    // TODO: Revisar si se actualiza el usuario en Mongo.
     updateUser = async(userEmail, cartId) => {
         try {
             const findUser = await UserModel.findOne({ email: userEmail });
@@ -98,7 +98,7 @@ export default class Users {
             CustomError.createError({
                 name: 'Error in sendMail from MONGO file',
                 cause: generateNotFoundError(userEmail),
-                message: 'The email does not match any user in pur DB',
+                message: 'The email does not match any user in our DB',
                 code: ERRORS.NOT_FOUND_ERROR
             })
         }
@@ -107,15 +107,18 @@ export default class Users {
 
         const resetLink = `${config.URL}/users/resetLink/${user._id}/${resetToken}`
 
-        await sendMail.send({
+        const mailOptions = {
             user: `${user.email}`,
             subject: `Reset your account password.`,
-            html: `<main>
+            html:   `<main class="container m-3">
                         <h2>Clik the link below to reset your password</h2>
                         <br>
-                        <a href='${resetLink}'>Click the link to reset password.</a>
+                        <a href='${resetLink}'>Click here.</a>
+                        <p class="mute">The is valid for 60 minutes.</p>
                     </main>`
-        })
+        }
+
+        await sendMail.send(mailOptions)
 
         return true
     }

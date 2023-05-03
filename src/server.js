@@ -13,8 +13,8 @@ import passport from 'passport';
 import { passportCall } from './utils/utils.js';
 import { Server } from 'socket.io';
 import { addLogger } from './utils/logger.js';
-import cluster from 'cluster';
-import { cpus } from 'os';
+// import cluster from 'cluster';
+// import { cpus } from 'os';
 import swaggerUiExpress from "swagger-ui-express";
 import initSwagger from './utils/swagger.js';
 // Rutas

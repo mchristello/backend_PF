@@ -1,3 +1,4 @@
+import { CartModel } from '../dao/mongo/models/carts.model.js';
 import CustomError from '../repository/errors/custom.error.js';
 import ERRORS from '../repository/errors/enums.js';
 import { generateGeneralError, generateInputError, generateNoLoggedUser } from '../repository/errors/info.js';
@@ -65,7 +66,7 @@ export const getProducts = async (req, res) => {
         });
 
     } catch (error) {
-        req.logger.error(error)
+        req.logger.error(`Error in ${req.url}` + error.message)
         return res.status(500).render('errors/general', { 
             style: 'style.css',
             error: error.message
@@ -91,14 +92,25 @@ export const cartById = async (req, res) => {
 
         const result = await CartsService.getCartById(cid)
 
+        // Logica para pasar el importe total del carrito
+        const cart = await CartModel.findOne({ _id: cid })
+        const products = Array.from(cart.products);
+        const total = products.map(p => {
+            let amount = p.product.price * p.quantity;
+            return amount
+        })
+        const acc = total.reduce((acc, acum) => acc + acum, 0)
+        // Logica para pasar el importe total del carrito
+
         return res.render('products/carts', { 
             result,
             user,
             isAdmin,
+            acc,
             style: 'style.css'
         })
     } catch (error) {
-        req.logger.error(error)
+        req.logger.error(error.message)
         return res.status(500).render('errors/general', { 
             style: 'style.css',
             error: error.message

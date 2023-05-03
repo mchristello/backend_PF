@@ -51,14 +51,14 @@ export const authToken = (req, res, next) => {
 }
 
 export const authPolicies = (policies) => (req, res, next) => {
+    if(!req.session.user) {
+        return res.status(401).send({ status: 'error', error: "User Not Loged In" });
+    }
     // const user = req.session.user
     // req.logger.debug(`THIS IS USER FROM AUTHPOLICIES ---> ${user}`);
     const rol = req.session.user.rol
     req.logger.debug(`THIS IS ROL FROM AUTHPOLICIES ---> ${rol}`);
 
-    if(!req.session) {
-        return res.status(401).send({ status: 'error', error: "User Not Loged In" });
-    }
 
     if (rol !== policies){
         return res.status(403).render('errors/general', { 

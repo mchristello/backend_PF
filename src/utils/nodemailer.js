@@ -4,8 +4,9 @@ import config from '../config/config.js'
 export default class Mail {
     constructor() {
         this.transport = nodemailer.createTransport({
-            service: 'gmail',
+            service: 'hotmail',
             port: 587,
+            host: 'smtp-mail.outlook.com',
             auth: {
                 user: config.TRANSPORT_USER,
                 pass: config.TRANSPORT_PASS
@@ -16,16 +17,13 @@ export default class Mail {
         })
     }
 
-    send = async (user, subject, html) => {
-        console.log(`From nodemailer: `, user);
+    send = async (options) => {
         const result = await this.transport.sendMail({
             from: config.TRANSPORT_USER,
-            to: user.user,
-            subject: user.subject,
-            html: user.html
+            to: options.user,
+            subject: options.subject,
+            html: options.html
         })
-
-        console.log(`result from Nodemailer: `, result);
 
         return result
     }
