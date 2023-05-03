@@ -178,6 +178,7 @@ export default class Users {
     updateLastConnection = async(uid) => {
         const user = await UserModel.findOne({ _id: uid });
         const lastConnection = new Date().toLocaleString()
+
         user.last_connection = lastConnection;
         user.save();
 

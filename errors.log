@@ -66,3 +66,4 @@ error: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
 error: Assignment to constant variable.
 error: Error un postReset: ReferenceError: resetToken is not defined
 error: Error un postReset: Error: Invalid login: 535 5.7.3 Authentication unsuccessful [CP5P284CA0012.BRAP284.PROD.OUTLOOK.COM 2023-05-03T14:50:17.155Z 08DB4BB802948972]
+error: Error un updateInfo: TypeError: UsersService.findById is not a function, endopoint: /users/updateInfo

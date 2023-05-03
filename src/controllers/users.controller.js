@@ -139,12 +139,12 @@ export const postReset = async (req, res) => {
         const userEmail = req.body.email
         
         const sendMail = await UsersService.sendResetMail(userEmail)
-        req.logger.debug(`sendMail from postReset: ${sendMail}`);
+        req.logger.debug(`sendMail from postReset --------> ${sendMail}`);
 
         const date = new Date();
         const currentDate = date.toLocaleString();
     
-        return res.status(200).send({ message: `Mail sent at ${currentDate}. Check your inbox` })
+        return res.status(200).send({ status: 'success', message: `Mail sent at ${currentDate}. Check your inbox` })
 
     } catch (error) {
         req.logger.error(`Error un postReset: ${error}`)
@@ -171,7 +171,7 @@ export const getResetLink = async(req, res) => {
             return res.status(401).redirect('users/resetPassword')
         }
 
-        return res.render('users/newPassword', {
+        return res.status(200).render('users/newPassword', {
             style: 'style.css',
             userEmail: user.email,
             uid,
@@ -208,7 +208,6 @@ export const postResetLink = async (req, res) => {
         return res.status(400).send({ status: 'error', error: error });
     }
 }
-
 
 export const modifyRol = async (req, res) => {
     try {

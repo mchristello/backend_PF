@@ -1,8 +1,9 @@
 import { CartModel } from '../dao/mongo/models/carts.model.js';
+import UserModel from '../dao/mongo/models/users.model.js';
 import CustomError from '../repository/errors/custom.error.js';
 import ERRORS from '../repository/errors/enums.js';
 import { generateGeneralError, generateInputError, generateNoLoggedUser } from '../repository/errors/info.js';
-import { CartsService, ProductsService } from '../repository/index.js';
+import { CartsService, ProductsService, UsersService } from '../repository/index.js';
 
 export const home = async (req, res) => {
     try {
@@ -219,13 +220,39 @@ export const userAccount = async (req, res) => {
             });
         }
         
-        res.render('users/current', {
+        return res.render('users/current', {
             style: 'style.css',
             user,
             isAdmin
         });
     } catch (error) {
-        req.logger.error(error)
+        req.logger.error(`Error un userAccount: ${error}, endopoint: ${req.url}`)
+        return res.status(500).render('errors/general', { 
+            style: 'style.css',
+            error: error.message
+        })
+    }
+}
+
+export const updateInfo = async (req, res) => {
+    try {
+        const user = req.session.user;
+        const body = req.body;
+    
+        const updateUser = {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: body.email,
+            rol: body.rol,
+            age: body.age,
+        }
+
+        const update = await UserModel.updateOne({ _id: user._id }, updateUser)
+        const newUser = await UsersService.getById(user._id)
+
+        return res.status(200).redirect('/users/current')
+    } catch (error) {
+        req.logger.error(`Error un updateInfo: ${error}, endopoint: ${req.url}`)
         return res.status(500).render('errors/general', { 
             style: 'style.css',
             error: error.message

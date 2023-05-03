@@ -32,11 +32,12 @@ export const add = async (req, res) => {
         const body = {
             title: data.title,
             description: data.description,
-            price: data.price,
-            category: data.category,
-            code: data.code,
-            stock: data.stock,
             thumbnail: data.thumbnail,
+            category: data.category,
+            price: data.price,
+            code: data.code,
+            status: true,
+            stock: data.stock,
             owner: owner
         }
 

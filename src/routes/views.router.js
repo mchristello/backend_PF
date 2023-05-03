@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { purchase } from '../controllers/carts.controller.js';
-import { addNewProdGet, addNewProdPost, cartById, getProducts, home, productDetails, userAccount } from '../controllers/views.controller.js';
+import { addNewProdGet, addNewProdPost, cartById, getProducts, home, productDetails, updateInfo, userAccount } from '../controllers/views.controller.js';
 import { AuthMiddleware } from '../middleware/auth.middleware.js';
 
 
@@ -29,5 +29,19 @@ router.get('/users/current', AuthMiddleware.isAuthenticated, userAccount)
 
 // Purchase de compra
 router.post('/carts/:cid/purchase', AuthMiddleware.isAuthenticated, purchase)
+
+// Update user info
+router.get('/users/updateInfo', AuthMiddleware.isAuthenticated, async(req, res) => {
+    const user = req.session.user;
+    const isAdmin = user.rol === 'admin' || user.rol === 'premium';
+
+    res.render('users/updateInfo', {
+        style: 'style.css',
+        user,
+        isAdmin
+    })
+})
+
+router.post('/users/updateInfo', AuthMiddleware.isAuthenticated, updateInfo)
 
 export default router

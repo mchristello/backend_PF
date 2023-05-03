@@ -54,6 +54,23 @@ router.get('/current', AuthMiddleware.currentUser ,async (req, res) => {
 
 router.get("/premium/:uid", modifyRol);
 
-router.post('/:uid/documents', uploadDocs)
+router.post('/:uid/documents', uploadDocs);
+
+// TODO: Terminar con la eliminación de usuarios inactivos
+router.get('/deleteIncativeUsers', authPolicies('admin'), async(req, res) => {
+    const session = req.session.user;
+    if(!session) return res.status(400).send({ status: 'error', error: 'No user logged in' })
+
+    const user = await UsersService.getById(session._id)
+    console.log(user);
+
+    const fecha1 = new Date(user.last_connection).toLocaleString();
+    const fecha2 = new Date().toLocaleString();
+
+    console.log(fecha1);
+    console.log(fecha2);
+
+    return res.status(200).send({ status: 'success', payload: user })
+})
 
 export default router;
