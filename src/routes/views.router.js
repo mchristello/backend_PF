@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { purchase } from '../controllers/carts.controller.js';
-import { addNewProdGet, addNewProdPost, cartById, getProducts, home, productDetails, updateInfo, userAccount } from '../controllers/views.controller.js';
+// import { purchase } from '../controllers/carts.controller.js';
+import { addNewProdGet, addNewProdPost, cartById, getProducts, home, productDetails, updateInfo, userAccount, purchase, payment } from '../controllers/views.controller.js';
 import { AuthMiddleware } from '../middleware/auth.middleware.js';
 
 
@@ -28,6 +28,8 @@ router.get('/carts/:cid', AuthMiddleware.isAuthenticated, cartById);
 router.get('/users/current', AuthMiddleware.isAuthenticated, userAccount)
 
 // Purchase de compra
+router.get('/carts/:cid/payment', AuthMiddleware.isAuthenticated, payment)
+
 router.post('/carts/:cid/purchase', AuthMiddleware.isAuthenticated, purchase)
 
 // Update user info

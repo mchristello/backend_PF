@@ -23,12 +23,19 @@ const ticketSchema = new mongoose.Schema({
         unique: true,
     },
     amount: Number,
-    purchaser: String,
+    purchaser: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    },
 });
 
 ticketSchema.set("timestamps", {
     createdAt: "purchased_datetime",
 });
+
+ticketSchema.pre('find', function () {
+    this.populate('purchaser')
+})
 
 
 export const TicketModel = mongoose.model(ticketCollection, ticketSchema);

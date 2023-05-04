@@ -28,6 +28,10 @@ export const add = async (req, res) => {
     try {
         const data = req.body
         const owner = req.session.user._id
+
+        if(!owner) {
+            return res.status(404).send({ status: 'error', message: 'User not found' });
+        }
         
         const body = {
             title: data.title,

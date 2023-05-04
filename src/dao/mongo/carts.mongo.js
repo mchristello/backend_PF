@@ -99,7 +99,8 @@ export default class Carts {
     }
 
     newTicket = async (user, acc) => {
-        const newTicket = await TicketModel.create({ amount: acc, purchaser: user });
+        const newTicket = await TicketModel.create({ amount: acc, purchaser: user._id });
+        console.log(newTicket);
         return newTicket;    
     }
 
@@ -129,7 +130,7 @@ export default class Carts {
         const total = await this.updateStock(cid, products);
         const acc = total.reduce((acc, acum) => acc + acum, 0)
 
-        const newTicket = await this.newTicket(user.email, acc);
+        const newTicket = await this.newTicket(user, acc);
 
         return newTicket;
     }

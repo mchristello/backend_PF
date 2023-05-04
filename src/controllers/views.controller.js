@@ -1,4 +1,5 @@
 import { CartModel } from '../dao/mongo/models/carts.model.js';
+import { TicketModel } from '../dao/mongo/models/tickets.model.js';
 import UserModel from '../dao/mongo/models/users.model.js';
 import CustomError from '../repository/errors/custom.error.js';
 import ERRORS from '../repository/errors/enums.js';
@@ -183,6 +184,12 @@ export const productDetails = async (req, res) => {
         const productFound = await ProductsService.find(pid)
 
         const user = req.session.user;
+        if(!user) {
+            return res.status(400).render('errors/general', { 
+                style: 'style.css',
+                error: 'Please Login first.'
+            })
+        }
         const isAdmin = user.rol === 'admin' || user.rol === 'premium';
 
         res.render('products/productDetail', {
@@ -195,7 +202,7 @@ export const productDetails = async (req, res) => {
         req.logger.error(`${error.message} at URL: ${req.url}`)
         CustomError.createError({
             name: `Views controller error: `,
-            cause: generateGeneralError(error),
+            cause: generateGeneralError(),
             message: `Oh oh...`,
             code: ERRORS.GENERAL_ERROR
         })
@@ -203,6 +210,48 @@ export const productDetails = async (req, res) => {
             style: 'style.css',
             error: error.message
         })
+    }
+}
+
+export const payment = (req, res) => {
+    try {
+        const cid = req.params
+        const user = req.session.user
+
+        return res.render('products/payment', {
+            style: 'style.css',
+            user,
+        })
+    } catch (error) {
+        req.logger.error(error)
+        return res.status(400).send({ status: 'error', error: error.message });
+    }
+}
+
+export const purchase = async (req, res) => {
+    try {
+        const cid = req.params.cid;
+        const user = req.session.user
+
+        const result = await CartsService.purchase(cid, user.email);
+
+        const cart = await CartModel.findOne({_id: cid });
+
+        req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
+
+        // const ticket = await TicketModel.find
+        
+        return res.status(200).send({ status: 'success', payload: result })
+
+        // return res.render('products/payment', {
+        //     style: 'style.css',
+        //     user,
+        //     result
+        // })
+
+    } catch (error) {
+        req.logger.error(error)
+        return res.status(400).send({ status: 'error', error: error.message });
     }
 }
 

@@ -59,6 +59,6 @@ const confirmTicket = async(cid) => {
             console.log(`Compra realizada con exito con el ticket ${result.payload.code}`);
         }
     } catch (error) {
-        req.logger.error(error.message);
+        console.error(`Error en cart.js ----> ${error.message}`);
     }
 }

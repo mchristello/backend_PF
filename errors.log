@@ -67,3 +67,10 @@ error: Assignment to constant variable.
 error: Error un postReset: ReferenceError: resetToken is not defined
 error: Error un postReset: Error: Invalid login: 535 5.7.3 Authentication unsuccessful [CP5P284CA0012.BRAP284.PROD.OUTLOOK.COM 2023-05-03T14:50:17.155Z 08DB4BB802948972]
 error: Error un updateInfo: TypeError: UsersService.findById is not a function, endopoint: /users/updateInfo
+error: undefined
+error: Cast to ObjectId failed for value "payment" (type string) at path "_id" for model "carts"
+error: Cast to ObjectId failed for value "payment" (type string) at path "_id" for model "carts"
+error: Cannot read properties of undefined (reading 'rol') at URL: /products/63b8331b7dac26c949c2d4bd
+error: Cannot read properties of undefined (reading 'rol') at URL: /products/63b8331b7dac26c949c2d4bd
+error: undefined
+error: undefined

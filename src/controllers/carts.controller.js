@@ -94,21 +94,22 @@ export const emptyCart = async(req, res) => {
     }
 }
 
-export const purchase = async (req, res) => {
-    try {
-        const cid = req.params.cid;
-        const user = req.session.user
+// PURCHASE ESTÁ EN VIEWS.CONTROLLER
+// export const purchase = async (req, res) => {
+//     try {
+//         const cid = req.params.cid;
+//         const user = req.session.user
 
-        const result = await CartsService.purchase(cid, user.email);
-        req.logger.debug(`RESULT FROM PURCHASE: `, result);
+//         const result = await CartsService.purchase(cid, user.email);
+//         req.logger.debug(`RESULT FROM PURCHASE: `, result);
 
-        const cart = await CartModel.findOne({_id: cid });
+//         const cart = await CartModel.findOne({_id: cid });
 
-        req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
-        return res.status(200).send({ status: 'success', payload: result })
+//         req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
+//         return res.status(200).send({ status: 'success', payload: result })
 
-    } catch (error) {
-        req.logger.error(error)
-        return res.status(400).send({ status: 'error', error: error.message });
-    }
-}
+//     } catch (error) {
+//         req.logger.error(error)
+//         return res.status(400).send({ status: 'error', error: error.message });
+//     }
+// }
