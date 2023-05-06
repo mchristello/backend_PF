@@ -34,6 +34,6 @@ export const generateOneUser = () => {
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
         email: faker.internet.email(),
-        password: faker.random.alphaNumeric(6)
+        password: 'secret'
     }
 }

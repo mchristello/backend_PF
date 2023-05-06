@@ -91,6 +91,41 @@ export const loginGoogle = async (req, res) => {
     }
 }
 
+export const loginApiPost = async (req, res) => {
+    try {
+        req.session.user = {
+            _id: req.user._id,
+            first_name: req.user.first_name,
+            last_name: req.user.last_name,
+            email: req.user.email,
+            age: req.user.age,
+            rol: req.user.rol,
+            social: req.user.social,
+            cart: req.user.cart,
+            documents: req.user.documents,
+            last_connection: req.user.last_connection
+        }
+
+        return res.cookie(config.COOKIE_NAME, req.user.token).send({ status: 'success', message: 'Login API Success.'});
+    } catch (error) {
+        req.logger.error(`From loginApiPost: ${error.message}`);
+        return res.status(400).send({ status: 'error', error: error.message });
+    }
+}
+
+export const registerApiPost = async (req, res) => {
+    try {
+        if(!req.user) {
+            return res.status(400)
+        }
+
+        return res.status(200).send({ status: 'success', message: 'Register API Success.'});
+    } catch (error) {
+        req.logger.error(`From resgisterApiPost: ${error}`);
+        return res.status(400).send({ status: 'error', error: error.message });
+    }
+}
+
 export const logout = async (req, res) => {
     try {
         const updateUser = UsersService.updateLastConnection(req.session.user._id)
@@ -237,17 +272,27 @@ export const modifyRol = async (req, res) => {
 // TODO: Completar funcionalidad para subir archivos.
 export const uploadDocs = async (req, res) => {
     try {
-        const uid = req.params
+        const { uid } = req.params
 
-        return res.status(200).send({ status: 'success', payload: `Endpoint para subir archivos del User.` });
+        const filesValues = Object.values(req.files)
+
+        filesValues.map(async (files) => {
+            return files.map(async (file) => {
+                const newFiles = {
+                name: file.originalname,
+                reference: file.path,
+                };
+                // console.log(newFiles);
+                await UsersService.uploadDocs(uid, newFiles);
+    
+                return;
+            });
+        });
+
+        return res.status(200).send({ status: 'success', message: `File uploaded succesfully.` });
         
     } catch (error) {
-        CustomError.createError({
-            name: 'Catch in uploadDocs, User.Controller',
-            cause: generateGeneralError(),
-            message: `Problema en UserController, endpoint: ${req.url}.`,
-            code: ERRORS.GENERAL_ERROR
-        })
+        req.logger.error(error.message)
         return res.status(500).send({ status: 'error', error: error.message })
     }
 }

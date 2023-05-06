@@ -45,4 +45,8 @@ export default class CartRepository {
         return this.dao.updateLastConnection(uid)
     }
 
+    uploadDocs = async (uid, files) => {
+        return this.dao.uploadDocs(uid, files)
+    }
+
 }

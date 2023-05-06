@@ -15,7 +15,12 @@ export default class Users {
             const users = await UserModel.find().lean().exec();
             return users;
         } catch (error) {
-            req.logger.error(`Error in UserService.`)
+            CustomError.createError({
+                name: 'Error in UserService.',
+                cause: generateGeneralError(),
+                message: 'Something went wrong in users.mongo.js.',
+                code: ERRORS.GENERAL_ERROR
+            })
         }
     }
 
@@ -24,16 +29,26 @@ export default class Users {
             const userSearched = await UserModel.findOne({ email: data });
             return userSearched;
         } catch (error) {
-            req.logger.error(`Error in getUser on UserService.`)
+            CustomError.createError({
+                name: 'Error in getUser.',
+                cause: generateGeneralError(error),
+                message: 'Something went wrong in users.mongo.js.',
+                code: ERRORS.GENERAL_ERROR
+            })
         }
     }
 
     getById = async(uid) => {
         try {
-            const userSearched = await UserModel.findOne({ _id: uid });
+            const userSearched = await UserModel.findOne({ _id: uid })
             return userSearched;
         } catch (error) {
-            req.logger.error(`Error in getById on UserService.`)
+            CustomError.createError({
+                name: 'Error in getById',
+                cause: generateGeneralError(),
+                message: 'Something went wrong in users.mongo.js.',
+                code: ERRORS.GENERAL_ERROR
+            })
         }
     }
 
@@ -43,7 +58,12 @@ export default class Users {
             req.logger.debug(`NEWUSER FROM USERS.MONGO: `, newUser);
             return newUser;
         } catch (error) {
-            req.logger.error(error.message);
+            CustomError.createError({
+                name: 'Error in createUser',
+                cause: generateGeneralError(),
+                message: 'Something went wrong in users.mongo.js.',
+                code: ERRORS.GENERAL_ERROR
+            })
         }
     }
 
@@ -183,5 +203,21 @@ export default class Users {
         user.save();
 
         return true
+    }
+
+    uploadDocs = async (uid, files) => {
+        const user = await this.getById(uid)
+    
+        if (!user) {
+            CustomError.createError({
+                name: 'Error in uploadDocs, User.Mongo',
+                cause: generateGeneralError(),
+                message: `There was a problem trying to upload de documents.`,
+                code: ERRORS.GENERAL_ERROR
+            })
+            return console.log(`Error en uploadDocs`);;
+        }
+    
+        return await UserModel.updateOne({ _id: uid }, { $push: { documents: files }});
     }
 }

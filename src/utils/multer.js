@@ -1,14 +1,12 @@
 import multer from "multer";
 import { __dirname } from '../dirname.js';
 
-console.log(__dirname);
-
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        const path = `${__dirname}/public/${file.fieldname}`;
+        const path = `${__dirname}/public/uploads/${file.fieldname}`;
 
         switch (file.fieldname) {
-            case "profiles":
+            case "profile":
                 cb(null, path);
                 break;
             case "products":
