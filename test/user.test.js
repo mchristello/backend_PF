@@ -20,14 +20,12 @@ describe('User register and login', () => {
     //             password: 'contraseña'
     //         }
     //         const {status} = await requester.post('/api/users/register').send(realUser);
-    //         console.log(status);
 
     //         expect(status).to.be.equal(401)
     //     });
 
         // it('Should resgister a new user.', async () => {
         //     const fakeUser = generateOneUser()
-        //     console.log(fakeUser);
 
         //     const {response} = await requester.post("/api/users/register").send(fakeUser);
 
@@ -70,8 +68,6 @@ describe('User register and login', () => {
             const response = await requester.get('/api/users/current')
 
             const { status, _body } = response
-            console.log(status);
-            console.log(`FROM GET API/USERS/CURRENT: `, _body);
 
             expect(status).to.be.eql(200);
         })
@@ -87,7 +83,6 @@ describe('User register and login', () => {
 
             //COOKIE_NAME=COOKIE_VALUE
             const cookieResult = result.headers['set-cookie'][0]
-            // console.log(`THIS IS COOKIERESULT: `, cookieResult);
 
             expect(cookieResult).to.be.ok 
             cookie = {
@@ -95,7 +90,6 @@ describe('User register and login', () => {
                 value: cookieResult.split('=')[1]
             }
 
-            console.log(`COOKIE VALUES: `, cookie);
 
             expect(cookie.name).to.be.ok.and.eql('coderCookieToken')
             expect(cookie.value).to.be.ok
@@ -105,8 +99,6 @@ describe('User register and login', () => {
         it('enviar cookie para ver el contenido del usuario', async () => {
             const {status, _body} = await requester.get('/api/users/current').set('Cookie', [`${cookie.name}=${cookie.value}`])
 
-            console.log(`THIS IS _BODY FROM COOKIE INFO:`, _body);
-            console.log(`THIS IS status FROM COOKIE INFO:`, status);
             
             expect(_body.payload.email).to.be.eql(realUser.email)
         })

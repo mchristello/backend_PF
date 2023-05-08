@@ -1,8 +1,9 @@
 import { CartModel } from '../dao/mongo/models/carts.model.js';
 import { CartsService } from '../repository/index.js';
 import CustomError from '../repository/errors/custom.error.js';
-import { generateGeneralError, generateNotFoundError } from '../repository/errors/info.js';
+import { generateGeneralError, generateNotFoundError, generatePermisionError } from '../repository/errors/info.js';
 import ERRORS from '../repository/errors/enums.js';
+import ProductModel from '../dao/mongo/models/products.model.js';
 
 export const getCarts = async(req, res) => {
     try {
@@ -54,6 +55,34 @@ export const addProduct = async(req, res) => {
         const cid = req.params.cid;
         const pid = req.params.pid;
         const user = req.session.user;
+
+        const product = await ProductModel.findOne({ _id: pid })
+
+        if (user.rol === 'admin') {
+            CustomError.createError({
+                name: `addProduct error in carts.mongo.js`,
+                cause: generatePermisionError(user),
+                message: `Su rol como ${user.rol} no le permite realizar acciones de compra.`,
+                code: ERRORS.PERMISION_ERROR
+            })
+            return res.render('errors/general', {
+                style: 'style.css',
+                error: `Problema tratando de agregar el producto ID: ${pid}. No se puede agregar al carrito un producto que le pertenece.`,
+            })
+        }
+        
+        if (product.owner == user._id) {
+            CustomError.createError({
+                name: `addProduct error in carts.mongo.js`,
+                cause: generatePermisionError(user),
+                message: `Problema tratando de agregar el producto ID: ${pid}. No se puede agregar al carrito un producto que le pertenece.`,
+                code: ERRORS.PERMISION_ERROR
+            })
+            return res.render('errors/general', {
+                style: 'style.css',
+                error: `Problema tratando de agregar el producto ID: ${pid}. No se puede agregar al carrito un producto que le pertenece.`,
+            })
+        }
         
         const result = await CartsService.addProduct(cid, pid, user);
         const actualizedCart = await CartsService.getCartById(cid);
@@ -61,7 +90,7 @@ export const addProduct = async(req, res) => {
         return res.status(200).send({ status: 'success', payload: actualizedCart });
 
     } catch (error) {
-        req.logger.error(error)
+        req.logger.error(error.message)
         return res.status(400).send({ status: 'error', error: error.message });
     }
 }
@@ -94,22 +123,21 @@ export const emptyCart = async(req, res) => {
     }
 }
 
-// PURCHASE ESTÁ EN VIEWS.CONTROLLER
-// export const purchase = async (req, res) => {
-//     try {
-//         const cid = req.params.cid;
-//         const user = req.session.user
+export const purchase = async (req, res) => {
+    try {
+        const cid = req.params.cid;
+        const user = req.session.user
 
-//         const result = await CartsService.purchase(cid, user.email);
-//         req.logger.debug(`RESULT FROM PURCHASE: `, result);
+        const result = await CartsService.purchase(cid, user.email);
+        req.logger.debug(`RESULT FROM PURCHASE: `, result);
 
-//         const cart = await CartModel.findOne({_id: cid });
+        const cart = await CartModel.findOne({_id: cid });
 
-//         req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
-//         return res.status(200).send({ status: 'success', payload: result })
+        req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
+        return res.status(200).send({ status: 'success', payload: result })
 
-//     } catch (error) {
-//         req.logger.error(error)
-//         return res.status(400).send({ status: 'error', error: error.message });
-//     }
-// }
+    } catch (error) {
+        req.logger.error(error)
+        return res.status(400).send({ status: 'error', error: error.message });
+    }
+}

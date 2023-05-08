@@ -1,5 +1,4 @@
 import { Router } from 'express';
-// import { purchase } from '../controllers/carts.controller.js';
 import { addNewProdGet, addNewProdPost, cartById, getProducts, home, productDetails, updateInfo, userAccount, purchase, payment } from '../controllers/views.controller.js';
 import { AuthMiddleware } from '../middleware/auth.middleware.js';
 

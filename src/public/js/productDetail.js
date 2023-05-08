@@ -1,6 +1,5 @@
 console.log(`From Product Detail.js`);
 let addProductBtn = document.getElementById('buy_product__btn');
-console.log(addProductBtn.value);
 
 let cid = document.getElementById('cart_id').innerHTML
 

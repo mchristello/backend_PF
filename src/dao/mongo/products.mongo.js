@@ -49,7 +49,6 @@ export default class Products {
 
     add = async (data) => {
         const newProduct = await ProductModel.create(data);
-        console.log(`New product added to the DB: ${newProduct.description}`);
         return newProduct;
     }
 

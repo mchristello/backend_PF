@@ -1,10 +1,9 @@
 let deleteProductBtn = document.querySelectorAll('#delete_btn');
 let cartBtn = document.getElementById('purchase');
+let emptyCart = document.getElementById('empty_cart');
 
-
-// DELETE para eliminar del carrito
-
-const cid = document.getElementById('purchase').value;
+// DELETE para eliminar producto del carrito
+const cid = document.getElementById('payment').value;
 
 const deleteProduct = async(cid, pid)=> {
     const response = await fetch(`/api/carts/${cid}/products/${pid}`, {
@@ -36,6 +35,32 @@ deleteProductBtn.forEach((b) => {
     });
 });
 
+// Empty cart
+emptyCart.addEventListener('click', () =>{
+    deleteAllProducts(cid);
+})
+
+const deleteAllProducts = async(cid) =>{
+    const response = await fetch(`/api/carts/${cid}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    const result = await response.json()
+
+    if(result.status === 'success') {
+        Swal.fire({
+            icon: 'warning',
+            title: 'All products has been deleted from cart. Please refresh!',
+            toast: true,
+            position: 'center',
+            timer: 1500,
+            timerProgressBar: true
+        })
+    }
+}
 
 
 // POST para confirmar ticket 
@@ -56,7 +81,15 @@ const confirmTicket = async(cid) => {
         const result = await response.json();
 
         if (result.status === 'success') {
-            console.log(`Compra realizada con exito con el ticket ${result.payload.code}`);
+            Swal.fire({
+                icon: 'success',
+                title: 'Your purchase is complete! Check for confirmation email in your inbox.',
+                toast: true,
+                position: 'center',
+                showConfirmButton: true,
+                confirmButtonText: `OK!`,
+                allowOutsideClick: false
+            })
         }
     } catch (error) {
         console.error(`Error en cart.js ----> ${error.message}`);

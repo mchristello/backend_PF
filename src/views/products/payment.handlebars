@@ -1,6 +1,7 @@
 <main class="container">
     <h1 class="title">Payment Form</h1>
-
-    <button class="btn btn-success" id="purchase" value={{user.cart._id}}>Confirmar Compra!</button>
+    {{#if user}}
+        <button class="btn btn-success" id="purchase" value={{user.cart._id}}>Confirmar Compra!</button>
+    {{/if}}
 </main>
 <script src="/js/cart.js"></script>

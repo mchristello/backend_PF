@@ -84,3 +84,19 @@ error: Cannot convert undefined or null to object
 error: Cannot convert undefined or null to object
 error: Cannot convert undefined or null to object
 error: Cannot convert undefined or null to object
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: Cannot read properties of undefined (reading '_id')
+error: Cannot read properties of undefined (reading '_id')
+error: Cannot read properties of undefined (reading 'owner')
+error: generatePermisionError is not defined
+error: Problema tratando de agregar el producto ID: 63c46248ce41333de85963f6
+error: Problema tratando de agregar el producto ID: 63b8334d7dac26c949c2d4c0. No se puede agregar al carrito un producto que le pertenece.
+error: Cannot read properties of undefined (reading 'owner')
+error: Problema tratando de agregar el producto ID: 63b8331b7dac26c949c2d4bd. No se puede agregar al carrito un producto que le pertenece.
+error: Problema tratando de agregar el producto ID: 63b8331b7dac26c949c2d4bd. No se puede agregar al carrito un producto que le pertenece.
+error: Problema tratando de agregar el producto ID: 63c46248ce41333de85963f6. No se puede agregar al carrito un producto que le pertenece.
+error: Su rol como admin no le permite realizar acciones de compra.
+error: Su rol como admin no le permite realizar acciones de compra.

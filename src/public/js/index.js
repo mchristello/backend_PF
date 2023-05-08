@@ -3,11 +3,10 @@ console.log(`Esto es desde el index.js que maneja el Front`);
 
 // Elementos del DOM
 // let btnNewProduct = document.getElementById('btn_new-product');
-let deleteProductBtn = document.querySelector('#delete_product_btn');
+// let deleteProductBtn = document.querySelector('#delete_product_btn');
 let sendBtn = document.getElementById('send-btn');
 let addProductBtn = document.querySelectorAll('#buy_product__btn');
 let cartId = document.getElementById('cart_id').innerHTML;
-console.log(`CART ID ---->`, cartId);
 
 // POST para agregar al carrito
 const addProductToCart = async(cartId, productId) => {

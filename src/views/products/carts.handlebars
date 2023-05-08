@@ -1,6 +1,6 @@
 <main>
     {{#if user}}
-        <h1 class="title">{{user.first_name}}, this is your cart so far.</h1>
+        <h1 class="title"><b style="color: #ffb76b">{{user.first_name}}</b>, this is your cart so far.</h1>
 
         <section class="container">
             <table class="table table-light table-striped table-hover">
@@ -22,19 +22,25 @@
                                 <th scope="row">{{this.product.description}}</th>
                                 <td>${{this.product.price}}</td>
                                 <td>{{this.quantity}}</td>
-                                <td scope="col"><a href="/products/{{this.product._id}}">Go to Detail</a></td>
-                                <td><button class="btn btn-outline-danger" id="delete_btn" value={{this.product._id}} type="submit">DELETE</button></td>
+                                <td><a href="/products/{{this.product._id}}">Go to Detail</a></td>
+                                <td><button class="btn btn-outline-danger" id="delete_btn" value={{this.product._id}}>DELETE</button></td>
                             </tr>
                         {{/each}}
                     {{/each}}
                     <tr class="table--total_row">
                         <td><h4><strong>TOTAL</strong></h4></td>
                         <td> -------------------------------------- </td>
-                        <td> --------------- </td>
-                        <td> ---------- </td>
                         <td><h4>$ {{acc}} .-</h4></td>
+                        <td> ---------- </td>
                         <td>
-                            <button class="btn btn-success"><a style="none" href="/carts/{{user.cart._id}}/payment"> Confirmar Compra!</a></button>
+                            <button class="btn btn-outline-success" value="{{user.cart._id}}" id="payment">
+                                <a style="none" href="/carts/{{user.cart._id}}/payment">Go to Payment!</a>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-danger" id="empty_cart">
+                                <a style="none"> Empty Cart!</a>
+                            </button>
                         </td>
                     </tr>
                 </tbody>

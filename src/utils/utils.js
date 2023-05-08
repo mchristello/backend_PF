@@ -54,11 +54,8 @@ export const authPolicies = (policies) => (req, res, next) => {
     if(!req.session.user) {
         return res.status(401).send({ status: 'error', error: "User Not Loged In" });
     }
-    // const user = req.session.user
-    // req.logger.debug(`THIS IS USER FROM AUTHPOLICIES ---> ${user}`);
-    const rol = req.session.user.rol
-    req.logger.debug(`THIS IS ROL FROM AUTHPOLICIES ---> ${rol}`);
 
+    const rol = req.session.user.rol
 
     if (rol !== policies){
         return res.status(403).render('errors/general', { 

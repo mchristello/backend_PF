@@ -27,6 +27,10 @@ export const generateAuthenticationError = (user) => {
 }
 
 export const generateAutorizationError = (user) => {
-    return `Ha ocurrido un problema al de permisos:
+    return `Ha ocurrido un problema de permisos:
             - ${user.email} no dispone de los permisos para el endpoint solicitado.`
+}
+
+export const generatePermisionError = (user) => {
+    return `Su rol de ${user.rol} no le permite realizar este acción.`
 }

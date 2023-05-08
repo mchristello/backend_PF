@@ -4,12 +4,11 @@ import config from '../config/config.js'
 export default class Mail {
     constructor() {
         this.transport = nodemailer.createTransport({
-            service: 'hotmail',
+            service: 'gmail',
             port: 587,
-            host: 'smtp-mail.outlook.com',
             auth: {
                 user: config.TRANSPORT_USER,
-                pass: config.TRANSPORT_PASS
+                pass: config.GOOGLE_TRANSPORT_PASS
             },
             tls: {
                 rejectUnauthorized: false

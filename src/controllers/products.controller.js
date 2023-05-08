@@ -1,4 +1,5 @@
 import { ProductsService } from '../repository/index.js';
+import { sendMail } from '../utils/nodemailer.js';
 
 
 export const get = async(req, res) => {
@@ -71,9 +72,21 @@ export const update = async(req, res) => {
 export const deleteOne = async(req, res) => {
     try {
         const pid = req.params.pid
-        console.log(`PID DELETE: `, pid);
         const user = req.session.user
-        console.log(`USER FROM DELETEONE ---> `, user);
+
+        if (user.rol === 'premium') {
+            const mailOptions = {
+                user: `${user.email}`,
+                subject: `Your product has been deleted.`,
+                html:   `<main class="container m-3 text-center">
+                            <h2 class="tex-center">This is an automatic advice</h2>
+                            <br>
+                            <p class="text-center">You product with the ID: ${pid} has been deleted from our database and is no logen available to buy.</p>
+                        </main>`
+            }
+
+            await sendMail.send(mailOptions)
+        }
 
         const result = await ProductsService.deleteOne(pid);
 

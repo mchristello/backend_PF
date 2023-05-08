@@ -47,20 +47,6 @@ app.engine('handlebars', handlebars.engine());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
-// CLUSTER
-// console.log(cluster.isPrimary);
-// const leanCpus = cpus().length
-// // console.log(`CPUs: `, leanCpus);
-
-// if(cluster.isPrimary) {
-//     console.log(`Proceso Master, generando workers`);
-//     for (let i = 0; i < leanCpus; i++) {
-//         cluster.fork()
-//     }
-// } else {
-//     console.log(`Este es un proceso from fork. No es master. isPrimary=false. I'm a Worker`);
-// }
-
 // Session
 app.use(session({
     store: MongoStore.create({

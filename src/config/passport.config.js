@@ -144,9 +144,8 @@ const initializePassport = () => {
     async(username, password, done) => {
         try {
             const user = await UsersService.getUser(username);
-            // req.logger.debug(`FROM LOGIN LOCAL: `, user);
             if(!user) {
-                console.log(`Something's wrong, we culdn't find the user.`);
+                req.logger.info(`Something's wrong, we culdn't find the user.`);
                 return done(null, false)
             }
 

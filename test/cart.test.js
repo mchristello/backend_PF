@@ -36,8 +36,5 @@ describe('Cart testing', () => {
 
         const { status, _body, ok } = response
         
-        console.log(status);
-        console.log(_body);
-        console.log(ok);
     })
 })

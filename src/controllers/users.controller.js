@@ -191,10 +191,8 @@ export const getResetLink = async(req, res) => {
     try {
         const uid = req.params.uid;
         const token = req.params.resetToken;
-        // console.log(`DATA FROM getResetLink: `, uid, resetToken);
 
         const user = await UsersService.getById(uid);
-        // console.log(`USER FROM getResetLink: `, user.email);
 
         if(user === undefined) {
             CustomError.createError({
@@ -214,7 +212,7 @@ export const getResetLink = async(req, res) => {
         })
 
     } catch (error) {
-        // req.logger.error(`Error un getResetLink: ${error}`)
+        req.logger.error(`Error un getResetLink: ${error.message}`)
         return res.status(400).send({ status: 'error', error: error.message });
     }
 }
@@ -239,7 +237,7 @@ export const postResetLink = async (req, res) => {
         return res.status(200).redirect("users/login");
 
     } catch (error) {
-        console.log(error);
+        req.logger.error(`Error un getResetLink: ${error.message}`)
         return res.status(400).send({ status: 'error', error: error });
     }
 }
@@ -269,7 +267,6 @@ export const modifyRol = async (req, res) => {
     }
 }
 
-// TODO: Completar funcionalidad para subir archivos.
 export const uploadDocs = async (req, res) => {
     try {
         const { uid } = req.params
@@ -282,7 +279,6 @@ export const uploadDocs = async (req, res) => {
                 name: file.originalname,
                 reference: file.path,
                 };
-                // console.log(newFiles);
                 await UsersService.uploadDocs(uid, newFiles);
     
                 return;
@@ -293,6 +289,79 @@ export const uploadDocs = async (req, res) => {
         
     } catch (error) {
         req.logger.error(error.message)
+        return res.status(500).send({ status: 'error', error: error.message })
+    }
+}
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await UsersService.getUsers();
+
+        const dataToShow = []
+        users.forEach(u => {
+            const user = {
+                first_name: u.first_name,
+                last_name: u.last_name,
+                email: u.email,
+                rol: u.rol,
+                social: u.social,
+                cart: u.cart,
+                last_connection: u.last_connection
+            }
+            dataToShow.push(user)
+        });
+        
+        return res.status(200).send({ status: 'succes', payload: dataToShow })
+    } catch (error) {
+        CustomError.createError({
+            name: `User search error`,
+            cause: generateGeneralError(error),
+            message: `Problema en ApiUsers, endpoint: ${req.url}.`,
+            code: ERRORS.GENERAL_ERROR
+        })
+        return res.status(500).send({ status: 'error', error: error.message })
+    }
+}
+
+export const getCurrentUser = async (req, res) => {
+    try {
+            const user = req.session.user;
+        
+            if(!user) {
+                return res.status(401).send({ status: 'error', error: 'User not logged in' });
+            }
+            const getUser = await UsersService.getUser(user.email)
+            
+            return res.send({ status: 'success', payload: getUser})
+    } catch (error) {
+        CustomError.createError({
+            name: `User search error`,
+            cause: generateGeneralError(error),
+            message: `Problema en ApiUsers, endpoint: ${req.url}.`,
+            code: ERRORS.GENERAL_ERROR
+        })
+        return res.status(500).send({ status: 'error', error: error.message })
+    }
+}
+
+export const deleteIncativeUsers = async(req, res) => {
+    try {
+        const session = req.session.user;
+        if(!session) return res.status(400).send({ status: 'error', error: 'No user logged in' })
+        
+        const user = await UsersService.getById(session._id)
+        
+        const fecha1 = new Date(user.last_connection).toLocaleString();
+        const fecha2 = new Date().toLocaleString();
+        
+        return res.status(200).send({ status: 'success', payload: user })
+    } catch (error) {
+        CustomError.createError({
+            name: `User search error`,
+            cause: generateGeneralError(error),
+            message: `Problema en ApiUsers, endpoint: ${req.url}.`,
+            code: ERRORS.GENERAL_ERROR
+        })
         return res.status(500).send({ status: 'error', error: error.message })
     }
 }

@@ -223,7 +223,7 @@ export const payment = (req, res) => {
             user,
         })
     } catch (error) {
-        req.logger.error(error)
+        req.logger.error(error.message)
         return res.status(400).send({ status: 'error', error: error.message });
     }
 }
@@ -241,16 +241,16 @@ export const purchase = async (req, res) => {
 
         // const ticket = await TicketModel.find
         
-        return res.status(200).send({ status: 'success', payload: result })
+        // return res.status(200).send({ status: 'success', payload: result })
 
-        // return res.render('products/payment', {
-        //     style: 'style.css',
-        //     user,
-        //     result
-        // })
+        return res.render('products/payment', {
+            style: 'style.css',
+            user,
+            result
+        })
 
     } catch (error) {
-        req.logger.error(error)
+        req.logger.error(error.message)
         return res.status(400).send({ status: 'error', error: error.message });
     }
 }

@@ -167,10 +167,8 @@ export default class Users {
 
         const checkingPass = bcrypt.compare(password.password, user.password, function(err, result) {
             if(err) {
-                console.log(`Error en bcrypt.compare`);
                 return false;
             } else {
-                console.log(`Bcrypt.compare OK`);
                 return true;
             }
         });
@@ -181,7 +179,6 @@ export default class Users {
                 message: `The new password must be different from the last one.`,
                 code: ERRORS.GENERAL_ERROR
             })
-            return console.log(`Error en checkingPass`);;
         }
 
         const hashedPassword = createHash(password.password)
@@ -215,7 +212,7 @@ export default class Users {
                 message: `There was a problem trying to upload de documents.`,
                 code: ERRORS.GENERAL_ERROR
             })
-            return console.log(`Error en uploadDocs`);;
+            return console.log(`Error en uploadDocs`);
         }
     
         return await UserModel.updateOne({ _id: uid }, { $push: { documents: files }});
