@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { addNewProdGet, addNewProdPost, cartById, getProducts, home, productDetails, updateInfo, userAccount, payment, paymentGet} from '../controllers/views.controller.js';
 import { AuthMiddleware } from '../middleware/auth.middleware.js';
+import { authPolicies } from '../utils/utils.js';
 
 
 const router = Router();

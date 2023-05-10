@@ -5,9 +5,9 @@ import { authPolicies } from '../utils/utils.js';
 const router = Router();
 
 router.get('/', get)
-router.post('/', authPolicies('admin'), add)
+router.post('/', authPolicies('admin', 'premium'), add)
 router.get('/:pid', find)
 router.post('/:pid', authPolicies('admin'), update)
-router.delete('/:pid', authPolicies('admin'), deleteOne)
+router.delete('/:pid', authPolicies('admin', 'premium'), deleteOne)
 
 export default router;

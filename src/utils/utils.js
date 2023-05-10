@@ -50,14 +50,20 @@ export const authToken = (req, res, next) => {
     })
 }
 
-export const authPolicies = (policies) => (req, res, next) => {
+export const authPolicies = (rol1, rol2) => (req, res, next) => {
     if(!req.session.user) {
         return res.status(401).send({ status: 'error', error: "User Not Loged In" });
     }
+    
+    const rol = req.session.user.rol;
+    console.log(`ROL FROM AUTHPOLICIES`, rol);
 
-    const rol = req.session.user.rol
-
-    if (rol !== policies){
+    if (typeof rol1 === "undefined") {
+        rol1 = rol2;
+        rol2 = null;
+    }
+    
+    if (rol !== rol1 && rol !== rol2){
         return res.status(403).render('errors/general', { 
             style: 'style.css',
             error: "User Not Authorized - Rol Check Failed" 
