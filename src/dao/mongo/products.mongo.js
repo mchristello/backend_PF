@@ -78,6 +78,11 @@ export default class Products {
             })    
         }
 
+        if(product.stock === 0) {
+            const result = await ProductModel.updateOne({ _id: pid },{ $set: { status: false }});
+            return result
+        }
+
         const result = await ProductModel.updateOne({ _id: pid },{ $inc: { stock: -quantity }});
         
         return result;

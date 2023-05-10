@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addNewProdGet, addNewProdPost, cartById, getProducts, home, productDetails, updateInfo, userAccount, purchase, payment } from '../controllers/views.controller.js';
+import { addNewProdGet, addNewProdPost, cartById, getProducts, home, productDetails, updateInfo, userAccount, payment, paymentGet} from '../controllers/views.controller.js';
 import { AuthMiddleware } from '../middleware/auth.middleware.js';
 
 
@@ -27,9 +27,9 @@ router.get('/carts/:cid', AuthMiddleware.isAuthenticated, cartById);
 router.get('/users/current', AuthMiddleware.isAuthenticated, userAccount)
 
 // Purchase de compra
-router.get('/carts/:cid/payment', AuthMiddleware.isAuthenticated, payment)
+router.post('/carts/:cid/payment', AuthMiddleware.isAuthenticated, payment)
 
-router.post('/carts/:cid/purchase', AuthMiddleware.isAuthenticated, purchase)
+router.get('/carts/:cid/payment', AuthMiddleware.isAuthenticated, paymentGet)
 
 // Update user info
 router.get('/users/updateInfo', AuthMiddleware.isAuthenticated, async(req, res) => {

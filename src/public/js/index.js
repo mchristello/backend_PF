@@ -20,10 +20,22 @@ const addProductToCart = async(cartId, productId) => {
 
     if(result.status === 'success') {
         Swal.fire({
+            title: 'Success.!',
             icon: 'success',
             title: 'Product added successfully',
             toast: true,
             position: 'top-right',
+            timer: 1500,
+            timerProgressBar: true
+        })
+    }
+
+    if(result.status === 'error') {
+        Swal.fire({
+            title: 'Ups.!',
+            icon: 'error',
+            title: 'The product has no stock available',
+            position: 'center',
             timer: 1500,
             timerProgressBar: true
         })

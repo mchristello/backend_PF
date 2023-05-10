@@ -12,9 +12,9 @@ export const generateNotFoundError = (searched) => {
             - ${searched.id ? searched.id : searched.email} no ha sido encontrado.`
 }
 
-export const generateNoStockError = (pid, qty) => {
+export const generateNoStockError = (pid) => {
     return `Ha habido un problema tratando de el producto al carrito:
-            - El priducto ${pid} solo dispone de este stock: ${qty}.`
+            - El producto ${pid} no dispone de suficiente stock.`
 }
 
 export const generateNoLoggedUser = () => {

@@ -10,7 +10,7 @@ router.get('/:cid', getCartById)
 router.delete('/:cid', emptyCart)
 router.post('/:cid/products/:pid', addProduct)
 router.delete('/:cid/products/:pid', deleteProduct)
-router.get('/:cid/purchase', purchase)
+router.post('/:cid/purchase', purchase)
 
 
 

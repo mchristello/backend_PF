@@ -83,12 +83,12 @@ export default class Carts {
         return emptyCart;
     }
 
-    newTicket = async (user, acc) => {
-        const newTicket = await TicketModel.create({ amount: acc, purchaser: user._id });
+    newTicket = async (uid, acc) => {
+        const newTicket = await TicketModel.create({ amount: acc, purchaser: uid });
         return newTicket;    
     }
 
-    purchase = async(cid, email) => {
+    purchase = async(cid, uid) => {
         const cart = await CartModel.findOne({_id: cid });
         if (!cart) {
             CustomError.createError({
@@ -109,12 +109,10 @@ export default class Carts {
             })
         }
 
-        const user = await UserModel.find({ email: email })
-
         const total = await this.updateStock(cid, products);
         const acc = total.reduce((acc, acum) => acc + acum, 0)
 
-        const newTicket = await this.newTicket(user, acc);
+        const newTicket = await this.newTicket(uid, acc);
 
         return newTicket;
     }

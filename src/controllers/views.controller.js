@@ -5,6 +5,7 @@ import CustomError from '../repository/errors/custom.error.js';
 import ERRORS from '../repository/errors/enums.js';
 import { generateGeneralError, generateInputError, generateNoLoggedUser } from '../repository/errors/info.js';
 import { CartsService, ProductsService, UsersService } from '../repository/index.js';
+import { sendMail } from '../utils/nodemailer.js';
 
 export const home = async (req, res) => {
     try {
@@ -213,42 +214,49 @@ export const productDetails = async (req, res) => {
     }
 }
 
-export const payment = (req, res) => {
+export const payment = async(req, res) => {
     try {
-        const cid = req.params
+        const { cid } = req.params
         const user = req.session.user
 
-        return res.render('products/payment', {
-            style: 'style.css',
-            user,
-        })
+        const cart = await CartModel.findOne({ _id: cid })
+
+        const result = await CartsService.purchase(cid, user._id);
+
+        const mailOptions = {
+            user: `${user.email}`,
+            subject: `Thanks for your purchase.`,
+            html:   `<main class="container m-3 text-center">
+                        <h1 class="m-5">${user.first_name}, we appriciate your trust!</h1>
+                        <br>
+                        <p class="m-5">Your ticket number is ${result.code}</p>
+                        <p class="m-5">Also, we let you know that this is a fictitious ecommerce store, where we do not sell real products. It's a project for CoderHouse's Backend course.</p>
+                        <p class="m-5">I hope that everything went well and that you haven't encountered major inconveniences while browsing the website</p>
+                        <p class="m-5">If you wanna keep looking the website, be my guest!!! Click <a href="https://backendpf-production.up.railway.app/home">here</a>!
+                    </main>`
+        }
+        await sendMail.send(mailOptions)
+
+        return res.status(200).send({ status: 'success', payload: result })
+
     } catch (error) {
         req.logger.error(error.message)
         return res.status(400).send({ status: 'error', error: error.message });
     }
 }
 
-export const purchase = async (req, res) => {
+export const paymentGet = async(req, res) => {
     try {
-        const cid = req.params.cid;
+        const { cid } = req.params
         const user = req.session.user
-
-        const result = await CartsService.purchase(cid, user.email);
-
-        const cart = await CartModel.findOne({_id: cid });
-
-        req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
-
-        // const ticket = await TicketModel.find
+        const ticket = await TicketModel.findOne({ purchaser: user._id })
+        console.log(ticket);
         
-        // return res.status(200).send({ status: 'success', payload: result })
-
         return res.render('products/payment', {
             style: 'style.css',
             user,
-            result
+            ticket
         })
-
     } catch (error) {
         req.logger.error(error.message)
         return res.status(400).send({ status: 'error', error: error.message });

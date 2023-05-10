@@ -1,7 +1,7 @@
 import { CartModel } from '../dao/mongo/models/carts.model.js';
 import { CartsService } from '../repository/index.js';
 import CustomError from '../repository/errors/custom.error.js';
-import { generateGeneralError, generateNotFoundError, generatePermisionError } from '../repository/errors/info.js';
+import { generateGeneralError, generateNoStockError, generateNotFoundError, generatePermisionError } from '../repository/errors/info.js';
 import ERRORS from '../repository/errors/enums.js';
 import ProductModel from '../dao/mongo/models/products.model.js';
 
@@ -57,6 +57,15 @@ export const addProduct = async(req, res) => {
         const user = req.session.user;
 
         const product = await ProductModel.findOne({ _id: pid })
+        if(product.stock === 0) {
+            CustomError.createError({
+                name: `addProduct error in carts.mongo.js`,
+                cause: generateNoStockError(pid),
+                message: `No hay suficiente stock..`,
+                code: ERRORS.NO_STOCK_ERROR
+            })
+            return res.status(500).send({ status: 'error', error: 'Not enough stock' })
+        }
 
         if (user.rol === 'admin') {
             CustomError.createError({
@@ -132,8 +141,8 @@ export const purchase = async (req, res) => {
         req.logger.debug(`RESULT FROM PURCHASE: `, result);
 
         const cart = await CartModel.findOne({_id: cid });
-
         req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
+        
         return res.status(200).send({ status: 'success', payload: result })
 
     } catch (error) {

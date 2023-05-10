@@ -13,6 +13,7 @@ export default {
     MONGO_URL: process.env.MONGO_URL,
     DB_NAME: process.env.DB_NAME,
     PRIVATE_KEY: process.env.PRIVATE_KEY,
+    STRIPE_KEY: process.env.STRIPE_KEY,
     JWT_PASS_TOKEN: process.env.JWT_PASS_TOKEN,
     COOKIE_NAME: process.env.COOKIE_NAME,
     COOKIE_SECRET: process.env.COOKIE_SECRET,
@@ -21,5 +22,7 @@ export default {
     GITHUB_CALLBACKURL: process.env.GITHUB_CALLBACKURL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    GOOGLE_CALLBACKURL: process.env.GOOGLE_CALLBACKURL
+    GOOGLE_CALLBACKURL: process.env.GOOGLE_CALLBACKURL,
+    MP_PUBLIC_KEY: process.env.MP_PUBLIC_KEY,
+    MP_ACCESS_TOKEN: process.env.MP_ACCESS_TOKEN
 }

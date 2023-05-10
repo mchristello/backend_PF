@@ -13,8 +13,7 @@ import passport from 'passport';
 import { passportCall } from './utils/utils.js';
 import { Server } from 'socket.io';
 import { addLogger } from './utils/logger.js';
-// import cluster from 'cluster';
-// import { cpus } from 'os';
+import cors from 'cors';
 import swaggerUiExpress from "swagger-ui-express";
 import initSwagger from './utils/swagger.js';
 // Rutas
@@ -33,7 +32,7 @@ const app = express();
 const httpServer = app.listen(config.PORT, console.log(`Server up & running on port ${config.PORT}`));
 
 
-
+app.use(cors())
 app.use(addLogger)
 app.use(errorHandler)
 app.use('/apiDocs', swaggerUiExpress.serve, swaggerUiExpress.setup(initSwagger()))

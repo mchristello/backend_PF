@@ -100,3 +100,36 @@ error: Problema tratando de agregar el producto ID: 63b8331b7dac26c949c2d4bd. No
 error: Problema tratando de agregar el producto ID: 63c46248ce41333de85963f6. No se puede agregar al carrito un producto que le pertenece.
 error: Su rol como admin no le permite realizar acciones de compra.
 error: Su rol como admin no le permite realizar acciones de compra.
+error: Cast to ObjectId failed for value "{ cid: '6418bef45487eab1b44de2a8' }" (type Object) at path "_id" for model "carts"
+error: Cast to ObjectId failed for value "{ cid: '6418bef45487eab1b44de2a8' }" (type Object) at path "_id" for model "carts"
+error: No hay productos en el carrito.
+error: E11000 duplicate key error collection: ecommerce.tickets index: code_1 dup key: { code: " eiVlUEHJZr9H" }
+error: No hay productos en el carrito.
+error: undefined
+error: undefined
+error: undefined {"cause":"Ups! Ha ocurrido un problema inesperado!:","code":4,"name":"Purchase error in carts.mongo.js"}
+error: undefined {"code":11000,"index":0,"keyPattern":{"code":1},"keyValue":{"code":" uzMGxvsBPyVW"}}
+error: No hay suficiente stock..
+error: No hay suficiente stock..
+error: No hay suficiente stock..
+error: No hay suficiente stock..
+error: No hay suficiente stock..
+error: No hay suficiente stock..
+error: No hay productos en el carrito.
+error: No hay suficiente stock..
+error: No hay productos en el carrito.
+error: E11000 duplicate key error collection: ecommerce.tickets index: code_1 dup key: { code: " xvKht5VBna8x" }
+error: Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "carts"
+error: Cannot read properties of undefined (reading 'id')
+error: Error in purchasePost at cart.controller Cannot read properties of undefined (reading 'id')
+error: Error in purchasePost at cart.controller Cannot read properties of undefined (reading 'id')
+error: Error in purchasePost at cart.controller Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "carts"
+error: Error in purchasePost at cart.controller Cast to ObjectId failed for value "[object Object]" (type string) at path "_id" for model "carts"
+error: Cast to ObjectId failed for value "purchaseResult" (type string) at path "_id" for model "carts"
+error: cid is not defined
+error: No hay productos en el carrito.
+error: No hay productos en el carrito.
+error: No hay productos en el carrito.
+error: _id is not defined
+error: _id is not defined
+error: Cannot read properties of undefined (reading '_id')

@@ -33,8 +33,8 @@
                         <td><h4>$ {{acc}} .-</h4></td>
                         <td> ---------- </td>
                         <td>
-                            <button class="btn btn-outline-success" value="{{user.cart._id}}" id="payment">
-                                <a style="none" href="/carts/{{user.cart._id}}/payment">Go to Payment!</a>
+                            <button class="btn btn-outline-success" value="{{user.cart._id}}" id="purchase">
+                                <a style="none" href="/carts/{{user.cart._id}}/payment">Confirm!</a>
                             </button>
                         </td>
                         <td>
@@ -52,5 +52,4 @@
 </main>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-{{!-- <script src="/socket.io/socket.io.js"></script> --}}
 <script src="/js/cart.js"></script>

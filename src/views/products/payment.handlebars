@@ -1,7 +1,15 @@
-<main class="container">
-    <h1 class="title">Payment Form</h1>
+<section class="container">
+    <h1 class="title text-center m-5">Payment Confirmation</h1>
     {{#if user}}
-        <button class="btn btn-success" id="purchase" value={{user.cart._id}}>Confirmar Compra!</button>
+        <div class="text-muted">CartId: <b id="cart_id">{{user.cart._id}}</b></div>
+
+        <h2 class="text-center m-5">{{user.first_name}}, thanks for choosing us!</h2>
+        
+        <section class="text-center m-5">
+            <p>Your ticket number is: {{ticket.code}}</p>
+            <p>Please, check your inbox for the confirmation email.</p>
+            <p>In case of any doubt, please get in touch with us</p>
+        </section>
     {{/if}}
-</main>
-<script src="/js/cart.js"></script>
+</section>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
