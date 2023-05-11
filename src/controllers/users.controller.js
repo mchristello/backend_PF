@@ -245,9 +245,8 @@ export const postResetLink = async (req, res) => {
 export const modifyRol = async (req, res) => {
     try {
         const uid = req.params.uid
-
         const user = await UsersService.getById(uid)
-        if(user.rol !== 'user' || user.rol !== 'premium') {
+        if(user.rol === 'admin') {
             return res.status(403).send({ status: 'error', message: 'No se puede actulizar el rol del usuario' });
         }
 

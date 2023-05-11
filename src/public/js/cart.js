@@ -1,10 +1,16 @@
 let deleteProductBtn = document.querySelectorAll('#delete_btn');
 let cartBtn = document.getElementById('purchase');
 let emptyCart = document.getElementById('empty_cart');
-// let paymentBtn = document.getElementById('payment');
 
 // DELETE para eliminar producto del carrito
-// const cid = document.getElementById('payment').value;
+
+deleteProductBtn.forEach((b) => {
+    b.addEventListener("click", (e) => {
+        e.preventDefault()
+        const pid = b.value;
+        deleteProduct(cartBtn.value, pid);
+    });
+});
 
 const deleteProduct = async(cid, pid)=> {
     const response = await fetch(`/api/carts/${cid}/products/${pid}`, {
@@ -20,21 +26,12 @@ const deleteProduct = async(cid, pid)=> {
         Swal.fire({
             icon: 'warning',
             title: 'Product deleted successfully',
-            toast: true,
-            position: 'top-right',
-            timer: 1500,
-            timerProgressBar: true
+            text: 'Please, reload de page to see your actualized cart.',
+            showConfirmButton: true,
+            confirmButtonText: 'Ok.!'
         })
     }
 }
-
-deleteProductBtn.forEach((b) => {
-    b.addEventListener("click", (e) => {
-        e.preventDefault()
-        const pid = b.value;
-        deleteProduct(cid, pid);
-    });
-});
 
 // Empty cart
 emptyCart.addEventListener('click', () =>{

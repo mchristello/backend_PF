@@ -133,3 +133,11 @@ error: No hay productos en el carrito.
 error: _id is not defined
 error: _id is not defined
 error: Cannot read properties of undefined (reading '_id')
+error: Error un userAccount: TypeError: UsersService.getUser(...).lean is not a function, endopoint: /users/current
+error: Problema tratando de agregar el producto ID: 63b8334d7dac26c949c2d4c0. No se puede agregar al carrito un producto que le pertenece.
+error: Problema tratando de agregar el producto ID: 63b8334d7dac26c949c2d4c0. No se puede agregar al carrito un producto que le pertenece.
+error: Problema tratando de agregar el producto ID: 63b8334d7dac26c949c2d4c0. No se puede agregar al carrito un producto que le pertenece.
+error: Problema tratando de agregar el producto ID: 63b8334d7dac26c949c2d4c0. No se puede agregar al carrito un producto que le pertenece.
+error: Problema tratando de agregar el producto ID: 63b8334d7dac26c949c2d4c0. No se puede agregar al carrito un producto que le pertenece.
+error: Problema tratando de agregar el producto ID: 63b8334d7dac26c949c2d4c0. No se puede agregar al carrito un producto que le pertenece.
+error: Problema tratando de agregar el producto ID: 63b8334d7dac26c949c2d4c0. No se puede agregar al carrito un producto que le pertenece.

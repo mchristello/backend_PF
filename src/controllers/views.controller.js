@@ -266,7 +266,8 @@ export const paymentGet = async(req, res) => {
 export const userAccount = async (req, res) => {
     try {
         const user = req.session.user
-        const isAdmin = user.rol === 'admin' || user.rol === 'premium';
+        const isAdmin = user.rol === 'admin'
+        // const isAdmin = user.rol === 'admin' || user.rol === 'premium';
 
         if(!user) {
             CustomError.createError({

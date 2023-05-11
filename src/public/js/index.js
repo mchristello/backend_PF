@@ -17,6 +17,7 @@ const addProductToCart = async(cartId, productId) => {
         }
     });
     const result = await response.json();
+    console.log(result);
 
     if(result.status === 'success') {
         Swal.fire({
@@ -34,10 +35,10 @@ const addProductToCart = async(cartId, productId) => {
         Swal.fire({
             title: 'Ups.!',
             icon: 'error',
-            title: 'The product has no stock available',
+            title: `${result.error}`,
             position: 'center',
-            timer: 1500,
-            timerProgressBar: true
+            showConfirmButton: true,
+            confirmButtonText: 'Ok!'
         })
     }
 }
