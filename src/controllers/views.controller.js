@@ -226,7 +226,7 @@ export const payment = async(req, res) => {
         const mailOptions = {
             user: `${user.email}`,
             subject: `Thanks for your purchase.`,
-            html:   `<main class="container m-3 text-center">
+            html:   `<main class="container m-3 text-center" style='background-color: #B9CDDA;">
                         <h1 class="m-5">${user.first_name}, we appriciate your trust!</h1>
                         <br>
                         <p class="m-5">Your ticket number is ${result.code}</p>
@@ -249,7 +249,7 @@ export const paymentGet = async(req, res) => {
     try {
         const { cid } = req.params
         const user = req.session.user
-        const ticket = await TicketModel.findOne({ purchaser: user._id })
+        const ticket = await TicketModel.findOne({ purchaser: user._id }).lean()
         console.log(ticket);
         
         return res.render('products/payment', {

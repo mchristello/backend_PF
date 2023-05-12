@@ -10,7 +10,6 @@ const isAuthenticated = (req, res, next) => {
 }
 
 const currentUser = (req, res, next) => {
-    console.log(`FROM CURRENTUSER MIDDLEWARE:`, req.session.user);
     if (req.session?.user) {
         return next();
     }

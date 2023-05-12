@@ -85,7 +85,8 @@ const confirmTicket = async(cid) => {
                 title: 'Your purchase is complete! Check for confirmation email in your inbox.',
                 position: 'center',
                 showConfirmButton: true,
-                confirmButtonText: `<a href='https://backendpf-production.up.railway.app/carts/${cid}/payment'>Ok!</a>`,
+                confirmButtonText: `<a href='https://backendpf-production.up.railway.app/carts/${cid}/payment'>To deploy page.</a>`,
+                confirmButtonText: `<a href='http://localhost:8080/carts/${cid}/payment'>To localhost page.</a>`,
                 allowOutsideClick: false
             })
         }

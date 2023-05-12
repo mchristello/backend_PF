@@ -76,7 +76,7 @@ export const addProduct = async(req, res) => {
             })
             return res.render('errors/general', {
                 style: 'style.css',
-                error: `Problema tratando de agregar el producto ID: ${pid}. No se puede agregar al carrito un producto que le pertenece.`,
+                error: `Problema tratando de agregar ${product.description}. No puede agregar al carrito un producto que le pertenece.`,
             })
         }
         
@@ -84,12 +84,12 @@ export const addProduct = async(req, res) => {
             CustomError.createError({
                 name: `addProduct error in carts.mongo.js`,
                 cause: generatePermisionError(user),
-                message: `Problema tratando de agregar el producto ID: ${pid}. No se puede agregar al carrito un producto que le pertenece.`,
+                message: `Problema tratando de agregar ${product.description}. No puede agregar al carrito un producto que le pertenece.`,
                 code: ERRORS.PERMISION_ERROR
             })
             return res.render('errors/general', {
                 style: 'style.css',
-                error: `Problema tratando de agregar el producto ID: ${pid}. No se puede agregar al carrito un producto que le pertenece.`,
+                error: `Problema tratando de agregar ${product.description}. No puede agregar al carrito un producto que le pertenece.`,
             })
         }
         

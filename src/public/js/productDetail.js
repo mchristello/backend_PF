@@ -1,4 +1,3 @@
-console.log(`From Product Detail.js`);
 let addProductBtn = document.getElementById('buy_product__btn');
 
 let cid = document.getElementById('cart_id').innerHTML
@@ -21,6 +20,17 @@ const addProductToCart = async(cartId, productId) => {
             position: 'top-right',
             timer: 1500,
             timerProgressBar: true
+        })
+    }
+
+    if(result.status === 'error') {
+        Swal.fire({
+            icon: 'error',
+            title: 'Ups.!',
+            text: `${result.error}`,
+            position: 'center',
+            showConfirmButton: true,
+            confirmButtonText: 'Ok!'
         })
     }
 }

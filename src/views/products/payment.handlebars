@@ -6,8 +6,8 @@
         <h2 class="text-center m-5">{{user.first_name}}, thanks for choosing us!</h2>
         
         <section class="text-center m-5">
-            <p>Your ticket number is: {{ticket.code}}</p>
-            <p>Please, check your inbox for the confirmation email.</p>
+            <p>Your ticket number is: <strong>{{ticket.code}}</strong></p>
+            <p>Please, check your inbox for the confirmation email, sended to: {{user.email}}</p>
             <p>In case of any doubt, please get in touch with us</p>
         </section>
     {{/if}}

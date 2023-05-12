@@ -1,6 +1,3 @@
-console.log(`Esto es desde el index.js que maneja el Front`);
-
-
 // Elementos del DOM
 // let btnNewProduct = document.getElementById('btn_new-product');
 // let deleteProductBtn = document.querySelector('#delete_product_btn');
@@ -17,7 +14,6 @@ const addProductToCart = async(cartId, productId) => {
         }
     });
     const result = await response.json();
-    console.log(result);
 
     if(result.status === 'success') {
         Swal.fire({
@@ -33,9 +29,9 @@ const addProductToCart = async(cartId, productId) => {
 
     if(result.status === 'error') {
         Swal.fire({
-            title: 'Ups.!',
             icon: 'error',
-            title: `${result.error}`,
+            title: 'Ups.!',
+            text: `${result.error}`,
             position: 'center',
             showConfirmButton: true,
             confirmButtonText: 'Ok!'
