@@ -8,7 +8,7 @@ export default class Messages {
         return messageLog;
     }
 
-    send = async() => {        
+    send = async(data) => {        
         try {
             const newMessage = await MessageModel.create(data);
 

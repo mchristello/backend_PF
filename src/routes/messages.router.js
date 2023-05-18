@@ -7,7 +7,7 @@ const messageService = new Messages()
 
 const router = Router();
 
-router.get('/', AuthMiddleware.isAuthenticated, authPolicies('user'), async (req, res) => {
+router.get('/', AuthMiddleware.isAuthenticated, authPolicies('user', 'premium'), async (req, res) => {
     const user = req.session.user;
     const message = await messageService.get()
 

@@ -298,11 +298,11 @@ export const updateInfo = async (req, res) => {
         const body = req.body;
     
         const updateUser = {
-            first_name: user.first_name,
-            last_name: user.last_name,
-            email: body.email,
-            rol: body.rol,
-            age: body.age,
+            first_name: body.first_name || user.first_name,
+            last_name: body.last_name || user.last_name,
+            email: body.email || user.email,
+            rol: body.rol || user.rol,
+            age: body.age || user.age,
         }
 
         const update = await UserModel.updateOne({ _id: user._id }, updateUser)

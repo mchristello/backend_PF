@@ -34,7 +34,7 @@ const initializePassport = () => {
         try {
             const user = await UsersService.getUser(username);
             if (user) {
-                req.logger.info(`Already exists a user with email ${username}`);
+                console.log(`Already exists a user with email ${username}`);
                 return done(null, user);
             }
 
@@ -48,7 +48,7 @@ const initializePassport = () => {
                 documents: [],
                 password: createHash(password)
             }
-            req.logger.info(`THIS IS NEWUSER FROM REGISTER: `, newUser);
+            console.log(`THIS IS NEWUSER FROM REGISTER: `, newUser);
 
             const result = await UsersService.createUser(newUser);
 
@@ -108,7 +108,7 @@ const initializePassport = () => {
         try {
             const user = await UsersService.getUser(profile._json.email);
             if(user) {
-                req.logger.info(`Already exists a user with email ${profile._json.email}`);
+                console.log(`Already exists a user with email ${profile._json.email}`);
                 return done(null, user);
             }
 
@@ -145,7 +145,7 @@ const initializePassport = () => {
         try {
             const user = await UsersService.getUser(username);
             if(!user) {
-                req.logger.info(`Something's wrong, we culdn't find the user.`);
+                console.log(`Something's wrong, we culdn't find the user.`);
                 return done(null, false)
             }
 

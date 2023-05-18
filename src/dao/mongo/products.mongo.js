@@ -71,7 +71,7 @@ export default class Products {
 
         if (product.stock < quantity) {
             CustomError.createError({
-                name: `Stock Error`,
+                name: `Stock Error in products.mongo`,
                 cause: generateNoStockError(pid, quantity),
                 message: `Not enought stock of the product ${pid} to complete your purchase`,
                 code: ERRORS.NO_STOCK_ERROR
@@ -80,6 +80,12 @@ export default class Products {
 
         if(product.stock === 0) {
             const result = await ProductModel.updateOne({ _id: pid },{ $set: { status: false }});
+            CustomError.createError({
+                name: `Stock Error`,
+                cause: generateNoStockError(pid, quantity),
+                message: `There's no stock of ${product.description}.`,
+                code: ERRORS.NO_STOCK_ERROR
+            })    
             return result
         }
 

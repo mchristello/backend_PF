@@ -1,7 +1,7 @@
 import { CartModel } from '../dao/mongo/models/carts.model.js';
 import { CartsService } from '../repository/index.js';
 import CustomError from '../repository/errors/custom.error.js';
-import { generateGeneralError, generateNoStockError, generateNotFoundError, generatePermisionError } from '../repository/errors/info.js';
+import { generateNoStockError, generateNotFoundError, generatePermisionError } from '../repository/errors/info.js';
 import ERRORS from '../repository/errors/enums.js';
 import ProductModel from '../dao/mongo/models/products.model.js';
 
@@ -71,7 +71,7 @@ export const addProduct = async(req, res) => {
             CustomError.createError({
                 name: `addProduct error in carts.mongo.js`,
                 cause: generatePermisionError(user),
-                message: `Su rol como ${user.rol} no le permite realizar acciones de compra.`,
+                message: `El rol de ${user.rol} no permite realizar acciones de compra.`,
                 code: ERRORS.PERMISION_ERROR
             })
             return res.render('errors/general', {
@@ -138,11 +138,7 @@ export const purchase = async (req, res) => {
         const user = req.session.user
 
         const result = await CartsService.purchase(cid, user.email);
-        req.logger.debug(`RESULT FROM PURCHASE: `, result);
 
-        const cart = await CartModel.findOne({_id: cid });
-        req.logger.debug(`CART AFTER THE PURCHASE: `, JSON.stringify(cart, null, 2, `\t`));
-        
         return res.status(200).send({ status: 'success', payload: result })
 
     } catch (error) {

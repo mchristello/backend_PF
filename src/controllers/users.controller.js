@@ -336,29 +336,32 @@ export const getCurrentUser = async (req, res) => {
         CustomError.createError({
             name: `User search error`,
             cause: generateGeneralError(error),
-            message: `Problema en ApiUsers, endpoint: ${req.url}.`,
+            message: `Problem in ApiUsers, endpoint: ${req.url}.`,
             code: ERRORS.GENERAL_ERROR
         })
         return res.status(500).send({ status: 'error', error: error.message })
     }
 }
 
-export const deleteIncativeUsers = async(req, res) => {
+export const deleteInactiveUsers = async(req, res) => {
     try {
         const session = req.session.user;
         if(!session) return res.status(400).send({ status: 'error', error: 'No user logged in' })
         
-        const user = await UsersService.getById(session._id)
+        const setHours = new Date();
+        setHours.setHours(setHours.getHours() - 48);
+
+        const result = await UsersService.deleteInactiveUsers(setHours)
+        if(result.deletedCount === 0) {
+            return res.status(200).send({ status: 'success', message: `All the users are recently active. No need to delete.`})
+        }
         
-        const fecha1 = new Date(user.last_connection).toLocaleString();
-        const fecha2 = new Date().toLocaleString();
-        
-        return res.status(200).send({ status: 'success', payload: user })
+        return res.status(200).send({ status: 'success', message: `${result.deletedCount} inactive users deleted.` })
     } catch (error) {
         CustomError.createError({
             name: `User search error`,
             cause: generateGeneralError(error),
-            message: `Problema en ApiUsers, endpoint: ${req.url}.`,
+            message: `Problem in ApiUsers, endpoint: ${req.url}.`,
             code: ERRORS.GENERAL_ERROR
         })
         return res.status(500).send({ status: 'error', error: error.message })

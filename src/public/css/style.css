@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Rock+Salt&display=swap');
+
+/* font-family: 'Roboto', sans-serif;
+font-family: 'Rock Salt', cursive; */
 
 * {
     margin: 0;
@@ -114,7 +118,7 @@ a:hover {
 }
 
 .search_form {
-    width: 40vw;
+    width: 30vw;
 }
 
 .search_option{
@@ -122,10 +126,13 @@ a:hover {
     border-radius: 10px;
     height: 50px;
     text-align: center;
+    font-family: 'Roboto', sans-serif;
 }
 .search_form_btn {
     width: 15rem;
     margin: 0 auto;
+    background-color: #d9eac8f0;
+    border-radius: 999px;
 }
 
 .new_product-form input {
@@ -189,8 +196,8 @@ p {
     align-items: center;
     font-family: 'Poppins', sans-serif;
     font-size: 1.5rem;
-    background-color: #fbf5f5f0;
-    width: 40vw;
+    background-color: #d9eac8f0;
+    width: 50vw;
     margin: 3rem auto;
     padding: 0 2rem;
     border-radius: 24px;
@@ -200,11 +207,16 @@ p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.2rem;
     margin: 1rem auto;
+    padding: 0 1rem;
 }
 
 .btn_home {
     font-size: 1.6rem;
     margin: 2rem auto;
+}
+
+.card_btn {
+    border-radius: 0;
 }
 
 

@@ -49,4 +49,8 @@ export default class CartRepository {
         return this.dao.uploadDocs(uid, files)
     }
 
+    deleteInactiveUsers = async (hs) => {
+        return this.dao.deleteInactiveUsers(hs)
+    }
+
 }

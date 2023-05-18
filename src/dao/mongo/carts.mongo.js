@@ -3,11 +3,10 @@ import UserModel from "./models/users.model.js";
 import { TicketModel } from "./models/tickets.model.js";
 import Products from "./products.mongo.js";
 import CustomError from "../../repository/errors/custom.error.js";
-import { generateAutorizationError, generateGeneralError, generateNotFoundError, generatePermisionError } from "../../repository/errors/info.js";
+import { generateGeneralError, generateNotFoundError } from "../../repository/errors/info.js";
 import ERRORS from "../../repository/errors/enums.js";
 
 const productsService = new Products();
-// const usersService = new Users();
 
 export default class Carts {
 

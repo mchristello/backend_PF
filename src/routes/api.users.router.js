@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { deleteIncativeUsers, getAllUsers, getCurrentUser, loginApiPost, modifyRol, registerApiPost, uploadDocs } from '../controllers/users.controller.js';
+import { deleteInactiveUsers, getAllUsers, getCurrentUser, loginApiPost, modifyRol, registerApiPost, uploadDocs } from '../controllers/users.controller.js';
 import { AuthMiddleware } from '../middleware/auth.middleware.js';
 import { authPolicies } from '../utils/utils.js';
 import upload from '../utils/multer.js';
@@ -22,7 +22,7 @@ router.post('/:uid/documents', upload.fields([
 ]), uploadDocs);
 
 // TODO: Terminar con la eliminación de usuarios inactivos
-router.get('/deleteIncativeUsers', authPolicies('admin'), deleteIncativeUsers)
+router.get('/deleteInactiveUsers', authPolicies('admin'), deleteInactiveUsers)
 
 
 // Router for Testing Register & Login

@@ -148,3 +148,8 @@ error: Problema tratando de agregar undefined. No puede agregar al carrito un pr
 error: Problema tratando de agregar Camiseta Argentina - AWAY. No puede agregar al carrito un producto que le pertenece.
 error: Problema tratando de agregar Camiseta Argentina - AWAY. No puede agregar al carrito un producto que le pertenece.
 error: Problema tratando de agregar Camiseta Argentina - AWAY. No puede agregar al carrito un producto que le pertenece.
+error: Su rol como admin no le permite realizar acciones de compra.
+error: El rol de admin no permite realizar acciones de compra.
+error: El rol de admin no permite realizar acciones de compra.
+error: Problema tratando de agregar Camiseta Independiente - HOME. No puede agregar al carrito un producto que le pertenece.
+error: No hay suficiente stock..

@@ -217,4 +217,9 @@ export default class Users {
     
         return await UserModel.updateOne({ _id: uid }, { $push: { documents: files }});
     }
+
+    deleteInactiveUsers = async (hs) => {
+        const result = await UserModel.deleteMany({ last_connection: { $gt: hs } });
+        return result
+    }
 }

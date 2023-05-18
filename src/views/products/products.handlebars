@@ -34,8 +34,8 @@
                         <p class="card-text">Price: $<i>{{this.price}}</i></p>
                         <p class="card-text">Stock Available: {{this.stock}}</p>
                     </div>
-                    <a href="/products/{{this._id}}" class="btn btn-info">Ver Detalle</a>
-                    <button variant="success" class="btn btn-success" id="buy_product__btn" value={{this._id}}>Add to Cart</button>
+                    <a href="/products/{{this._id}}" class="btn btn-info card_btn">Ver Detalle</a>
+                    <button variant="success" class="btn btn-success card_btn" id="buy_product__btn" value={{this._id}}>Add to Cart</button>
                 </div>
             {{/each}}
         </section>
@@ -50,8 +50,8 @@
                         <p class="card-text">Price: $<i>{{this.price}}</i></p>
                         <p class="card-text">Stock Available: {{this.stock}}</p>
                     </div>
-                    <a href="/products/{{this._id}}" class="btn btn-info">Ver Detalle</a>
-                    <a href="/users/login" variant="success" class="btn btn-success">Login to add to cart.</a>
+                    <a href="/products/{{this._id}}" class="btn btn-info card_btn">Ver Detalle</a>
+                    <a href="/users/login" variant="success" class="btn btn-success card_btn">Login to add to cart.</a>
                 </div>
             {{/each}}
         </section>
