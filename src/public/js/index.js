@@ -19,7 +19,7 @@ const addProductToCart = async(cartId, productId) => {
         Swal.fire({
             title: 'Success.!',
             icon: 'success',
-            title: 'Product added successfully',
+            text: 'Product added successfully',
             toast: true,
             position: 'top-right',
             timer: 1500,

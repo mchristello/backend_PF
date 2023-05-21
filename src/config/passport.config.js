@@ -5,7 +5,7 @@ import GitHubStrategy from 'passport-github2';
 import GoogleStrategy from 'passport-google-oauth2';
 import jwt from 'passport-jwt';
 // import User from '../dao/mongo/users.mongo.js';
-import { createHash, generateToken, validatePassword } from "../utils/index.js";
+import { alertConfig, createHash, generateToken, validatePassword } from "../utils/index.js";
 import UserModel from "../dao/mongo/models/users.model.js";
 import { UsersService, CartsService } from "../repository/index.js";
 
@@ -34,7 +34,7 @@ const initializePassport = () => {
         try {
             const user = await UsersService.getUser(username);
             if (user) {
-                console.log(`Already exists a user with email ${username}`);
+                alert(`Already exists a user with email ${username}`);
                 return done(null, user);
             }
 
@@ -48,8 +48,6 @@ const initializePassport = () => {
                 documents: [],
                 password: createHash(password)
             }
-            console.log(`THIS IS NEWUSER FROM REGISTER: `, newUser);
-
             const result = await UsersService.createUser(newUser);
 
             if (result.email === 'adminCoder@coder.com' || result.email === 'm.christello@hotmail.com') {

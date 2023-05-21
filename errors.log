@@ -153,3 +153,10 @@ error: El rol de admin no permite realizar acciones de compra.
 error: El rol de admin no permite realizar acciones de compra.
 error: Problema tratando de agregar Camiseta Independiente - HOME. No puede agregar al carrito un producto que le pertenece.
 error: No hay suficiente stock..
+error: From resgisterPost: ReferenceError: home is not defined
+error: From resgisterPost: sendMail is not defined
+error: From resgisterPost: Class constructor Mail cannot be invoked without 'new'
+error: From resgisterPost: sendMail is not a function
+error: req is not defined at URL: /63c45fcece41333de85963be
+error: Cannot read properties of null (reading 'description') at URL: /63c45fcece41333de85963be
+error: El rol de admin no permite realizar acciones de compra.

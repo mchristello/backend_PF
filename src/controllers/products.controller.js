@@ -79,9 +79,9 @@ export const deleteOne = async(req, res) => {
                 user: `${user.email}`,
                 subject: `Your product has been deleted.`,
                 html:   `<main class="container m-3 text-center">
-                            <h2 class="tex-center">This is an automatic advice</h2>
+                            <h2 class="tex-center">This is an automatic advice.</h2>
                             <br>
-                            <p class="text-center">You product with the ID: ${pid} has been deleted from our database and is no logen available to buy.</p>
+                            <p class="text-center">You product with the ID: ${pid} has been deleted from our database and is no longer available to buy.</p>
                         </main>`
             }
 

@@ -125,7 +125,7 @@ export default class Users {
 
         const resetToken = generateResetPasswordToken(user)
 
-        const resetLink = `${config.URL}/users/resetLink/${user._id}/${resetToken}`
+        const resetLink = `${config.BASE_URL}/users/resetLink/${user._id}/${resetToken}`
 
         const mailOptions = {
             user: `${user.email}`,

@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import config from '../config/config.js';
+import Swal from 'sweetalert2';
 
 export const createHash = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -56,7 +57,6 @@ export const authPolicies = (rol1, rol2) => (req, res, next) => {
     }
     
     const rol = req.session.user.rol;
-    console.log(`ROL FROM AUTHPOLICIES`, rol);
 
     if (typeof rol1 === "undefined") {
         rol1 = rol2;
@@ -85,5 +85,23 @@ export const passportCall = (strategyName) => {
             req.user = user
             next();
         })(req, res, next)
+    }
+}
+
+
+// Alert Config.
+export const alertConfig = (text) => {
+    try {
+        Swal.fire({
+            icon: 'wrong',
+            title: text,
+            position: 'center',
+            showConfirmButton: true,
+            confirmButtonText: `<a href='${config.BASE_URL}/users/register'>Try Again</a>`,
+            confirmButtonText: `<a href='${config.BASE_URL}/users/login'>Go To Login</a>`,
+            allowOutsideClick: false
+        })
+    } catch (error) {
+        req.logger.error(`From alertConfig in util.js: ${error.message}`);
     }
 }

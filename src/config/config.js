@@ -5,7 +5,7 @@ dotenv.config();
 export default {
     PORT: process.env.PORT,
     ENT: process.env.ENT,
-    URL: process.env.URL,
+    BASE_URL: process.env.BASE_URL,
     TRANSPORT_USER: process.env.TRANSPORT_USER,
     TRANSPORT_PASS: process.env.TRANSPORT_PASS,
     GOOGLE_TRANSPORT_PASS: process.env.GOOGLE_TRANSPORT_PASS,

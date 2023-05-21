@@ -77,7 +77,6 @@ const confirmTicket = async(cid) => {
         });
 
         const result = await response.json();
-        console.log(`FROM FRONT --->`, result);
 
         if (result.status === 'success') {
             Swal.fire({

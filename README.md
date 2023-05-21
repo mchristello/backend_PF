@@ -7,7 +7,7 @@
 ## <u>Demo</u>
 
 <!-- TODO: Inser GIF DEMO -->
-
+![Demo de la web page.](https://firebasestorage.googleapis.com/v0/b/padel-market-2259b.appspot.com/o/GIF_ecommerce.gif?alt=media&token=e17b26d7-5865-4c09-a11b-c331fd373d9d)
 
 
 
@@ -55,6 +55,9 @@
     - utils
     - views
 - /test
+    - users
+    - carts
+    - products
 
 ## <u>API Endpoints</u>
 

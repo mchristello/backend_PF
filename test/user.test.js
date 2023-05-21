@@ -4,7 +4,6 @@ import config from '../src/config/config.js';
 import { generateOneUser } from '../src/utils/faker.js';
 
 const expect = chai.expect;
-// const requester = supertest(config.URL);
 const requester = supertest('http://localhost:8080');
 
 
