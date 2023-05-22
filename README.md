@@ -68,10 +68,10 @@
 
 ## <u>API Endpoints</u>
 
-- "/api/products", brings all the products in the DB. [Try it here.](localhost:8080/api/products)
-- "/api/carts", brings all the carts existents in the DB. [Try it here.](localhost:8080/api/carts)
-- "/api/users", brings the list of users of the DB. Only admin users. [Try it here.](localhost:8080/api/users)
-- "/api/users/current", brings the current user logged in the website. [Try it here.](localhost:8080/api/users/current)
+- "/api/products", brings all the products in the DB. [Try it here.](http://localhost:8080/api/products)
+- "/api/carts", brings all the carts existents in the DB. [Try it here.](http://localhost:8080/api/carts)
+- "/api/users", brings the list of users of the DB. Only admin users. [Try it here.](http://localhost:8080/api/users)
+- "/api/users/current", brings the current user logged in the website. [Try it here.](http://localhost:8080/api/users/current)
 - "/api/logger", tests the Logger in the console.
 - "/api/mail"
 - "/api/mockingproducts", generate random users & products with @faker-js/faker.
@@ -82,7 +82,7 @@
 
 1° Run "npm run start" script to start the server.
 
-2° Open [LocalHost](localhost:8080/home) here, to view it in your browser.
+2° Open [LocalHost](http://localhost:8080/home) here, to view it in your browser.
 
 OR  ---- > Visit -> [THIS](https://backendpf-production.up.railway.app/home) <- URL.
 
