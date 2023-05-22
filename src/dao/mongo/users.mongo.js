@@ -55,7 +55,6 @@ export default class Users {
     createUser = async(data) => {
         try {
             const newUser = await UserModel.create(data)
-            req.logger.debug(`NEWUSER FROM USERS.MONGO: `, newUser);
             return newUser;
         } catch (error) {
             CustomError.createError({
@@ -131,10 +130,12 @@ export default class Users {
             user: `${user.email}`,
             subject: `Reset your account password.`,
             html:   `<main class="container m-3">
-                        <h2>Clik the link below to reset your password</h2>
+                        <h2 class="text-large">Clik the link below to reset your password</h2>
                         <br>
+                        <hr>
                         <a href='${resetLink}'>Click here.</a>
-                        <p class="mute">The is valid for 60 minutes.</p>
+                        <p class="mute">The link is valid for 60 minutes.</p>
+                        <hr>
                     </main>`
         }
 

@@ -41,7 +41,8 @@ export const getProducts = async (req, res) => {
             lean: true
         }
 
-        const result = await ProductsService.get(options, query)
+        const sendQuery = query ? query[0].toUpperCase() + query.substring(1) : "";
+        const result = await ProductsService.get(options, sendQuery);
 
         result.prevLink = result.hasPrevPage ? `/products?page=${result.prevPage}&limit=${result.limit}&query=${query || ""}&sort=${sort}` : "";
         result.nextLink = result.hasNextPage ? `/products?page=${result.nextPage}&limit=${result.limit}&query=${query || ""}&sort=${sort}` : ""; 
@@ -69,7 +70,7 @@ export const getProducts = async (req, res) => {
         });
 
     } catch (error) {
-        req.logger.error(`Error in ${req.url}` + error.message)
+        req.logger.error(`Error in ${req.url}: ` + error.message)
         return res.status(500).render('errors/general', { 
             style: 'style.css',
             error: error.message
@@ -250,7 +251,6 @@ export const paymentGet = async(req, res) => {
         const { cid } = req.params
         const user = req.session.user
         const ticket = await TicketModel.findOne({ purchaser: user._id }).lean()
-        console.log(ticket);
         
         return res.render('products/payment', {
             style: 'style.css',

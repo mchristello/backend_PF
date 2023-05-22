@@ -22,21 +22,21 @@ export const registerPost = async(req, res) => {
         if(!req.user) {
             return res.status(400)
         }
-        // const mailOptions = {
-        //     user: `${req.user.email}`,
-        //     subject: `Thanks for registering.`,
-        //     html:   `<main class="container m-3 text-center" style="background-color: #B9CDDA; font-family: 'Roboto', sans-serif;">
-        //                 <h1 class="m-5">Hi ${req.user.first_name}, welcome!!</h1>
-        //                 <br>
-        //                 <hr>
-        //                 <h4>You've created an account in our website, your starting role is: ${req.user.rol}</h4>
-        //                 <p class="m-5">I want to let you know that this is a fictitious ecommerce store, where we do not sell real products. It's a project for CoderHouse's Backend course.</p>
-        //                 <p>I hope that you find everything that you're looking for!</p>
-        //                 <hr>
-        //                 <p class="m-5">If you wanna keep looking the website, be my guest!!! Click <a href="${config.BASE_URL}/home">here</a>!
-        //             </main>`
-        // }
-        // await sendMail.send(mailOptions)
+        const mailOptions = {
+            user: `${req.user.email}`,
+            subject: `Thanks for registering.`,
+            html:   `<main class="container m-3 text-center" style="background-color: #B9CDDA; font-family: 'Roboto', sans-serif;">
+                        <h1 class="m-5">Hi ${req.user.first_name}, welcome!!</h1>
+                        <br>
+                        <hr>
+                        <h4>You've created an account in our website, your starting role is: ${req.user.rol}</h4>
+                        <p class="m-5">I want to let you know that this is a fictitious ecommerce store, where we do not sell real products. It's a project for CoderHouse's Backend course.</p>
+                        <p>I hope that you find everything that you're looking for!</p>
+                        <hr>
+                        <p class="m-5">If you wanna keep looking the website, be my guest!!! Click <a href="${config.BASE_URL}/home">here</a>!
+                    </main>`
+        }
+        await sendMail.send(mailOptions)
 
         return res.status(200).redirect('/users/login');
     } catch (error) {

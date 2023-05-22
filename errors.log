@@ -160,3 +160,14 @@ error: From resgisterPost: sendMail is not a function
 error: req is not defined at URL: /63c45fcece41333de85963be
 error: Cannot read properties of null (reading 'description') at URL: /63c45fcece41333de85963be
 error: El rol de admin no permite realizar acciones de compra.
+error: Error in /productsCannot read properties of undefined (reading 'toUpperCase')
+error: Error in /products: Cannot read properties of undefined (reading 'toUpperCase')
+error: Error in /products: Cannot read properties of undefined (reading 'toUpperCase')
+error: Error in /products: Cannot read properties of undefined (reading 'toUpperCase')
+error: Error in /products: Cannot read properties of undefined (reading 'toUpperCase')
+error: Error in /products: Cannot read properties of undefined (reading 'toUpperCase')
+error: Error in /products: sendQuery is not defined
+error: Error in /products: Cannot read properties of undefined (reading 'toUpperCase')
+error: Cannot read properties of undefined (reading '_id')
+error: Cannot read properties of undefined (reading '_id')
+error: Cannot read properties of undefined (reading '_id')

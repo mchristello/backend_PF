@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import passport from 'passport';
 import config from '../config/config.js';
-import Swal from 'sweetalert2';
 
 export const createHash = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -85,23 +84,5 @@ export const passportCall = (strategyName) => {
             req.user = user
             next();
         })(req, res, next)
-    }
-}
-
-
-// Alert Config.
-export const alertConfig = (text) => {
-    try {
-        Swal.fire({
-            icon: 'wrong',
-            title: text,
-            position: 'center',
-            showConfirmButton: true,
-            confirmButtonText: `<a href='${config.BASE_URL}/users/register'>Try Again</a>`,
-            confirmButtonText: `<a href='${config.BASE_URL}/users/login'>Go To Login</a>`,
-            allowOutsideClick: false
-        })
-    } catch (error) {
-        req.logger.error(`From alertConfig in util.js: ${error.message}`);
     }
 }

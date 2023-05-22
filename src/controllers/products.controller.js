@@ -61,6 +61,7 @@ export const update = async(req, res) => {
         const data = req.body
 
         const result = await ProductsService.update(pid, data);
+        req.logger.info(`The product has been updated`);
 
         return res.status(200).send({ status: 'success', payload: result });
     } catch (error) {

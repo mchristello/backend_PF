@@ -6,7 +6,7 @@ import { generateNotFoundError } from '../../repository/errors/info.js';
 export default class Products {
 
     constructor() {
-        this.path = './carts.json';
+        this.path = './users.json';
     }
 
     #getNextID = data => {
@@ -16,83 +16,81 @@ export default class Products {
         return nextID
     }
 
-    getCarts = () => {
+    getUsers = () => {
         if(fs.existsSync(this.path)) {
             const data = fs.readFileSync(this.path, 'utf-8')
-            const carts = JSON.parse(data);
+            const users = JSON.parse(data);
 
-            return carts
+            return users
         }
         return [];
     }
 
-    getCartById = async(cid) => {
-        const carts = await this.get();
-        const cart = carts.find(p => p.id === cid);
-        if(!cart) {
+    getUser = async(data) => {
+        const users = await this.getUsers();
+        const user = users.find(u => u.email === data);
+        if(user === undefined) {
             CustomError.createError({
-                name: `Error in deleteProduct: `,
-                cause: generateNotFoundError(cid),
-                message: `No se encontró el carrito`,
+                name: `Error in getUser, in users.file.js: `,
+                cause: generateNotFoundError(data),
+                message: `User not found`,
+                code: ERRORS.NOT_FOUND_ERROR
+            })
+
+            return false
+        }
+
+        return user;
+    }
+
+    getById = async (uid) => {
+        const users = await this.getUsers();
+        const user = users.find(u => u.id === uid);
+        if(!user) {
+            CustomError.createError({
+                name: `Error in getUser, in users.file.js: `,
+                cause: generateNotFoundError(data),
+                message: `User not found`,
                 code: ERRORS.NOT_FOUND_ERROR
             })
         }
 
-        return cart;
+        return user
     }
 
-    createCart = () => {
-        
-    }
+    createUser = async(data) => {
+        const users = await this.getUsers();
+        const id = await this.#getNextID(users)
 
-    addProduct = async(data) => {
-        req.logger.debug(data);
-        const products = await this.get();
-        const id = await this.#getNextID(products)
-
-        const newProduct = {
-            id: id,
-            title,
-            description,
-            price,
-            thumbnail,
-            code,
-            stock,
+        const newUser = {
+            id: id, 
+            first_name: data.first_name,
+            last_name: data.last_name,
+            email: data.email,
+            age: data.age,
+            password: data.password,
+            social: data.social,
+            cart: data.cart,
+            documents: data.documents,
         }
+        console.log(newUser);
 
-        products.push(newProduct);
-        await fs.promises.writeFile(this.path, JSON.stringify(products, null, 2));
+        users.push(newUser)
+        await fs.promises.writeFile(this.path, JSON.stringify(users, null, 2))
+
+        return newUser
     }
 
-    deleteProduct = async(cid, pid) => {
-        const carts = await this.getCarts();
-        const findCart = carts.find(cart => cart.cid === cid);
-        const findIndex = findCart.findIndex(p => p.pid === pid)
-        if(!findIndex) {
-            CustomError.createError({
-                name: `Error in deleteProduct: `,
-                cause: generateNotFoundError(pid),
-                message: `No se encontró el producto`,
-                code: ERRORS.NOT_FOUND_ERROR
-            })
-        }
+    modifyRol = async(uid) => {
+        const users = await this.getUsers();
+        const user = users.find(u => u.id === uid)
 
-        findCart.products.splice(findIndex, 1);
-        
-        await fs.promises.writeFile(this.path, JSON.stringify(findCart, null, 2))
+        user.rol = (user.rol === 'user') ? 'premium' : 'users';
+        console.log(`USER AFTER MODIFYROL IN FILE: `, user);
 
-        return findCart;  
+        users.push(user)
+
+        await fs.promises.writeFile(this.path, JSON.stringify(users, null, 2));
     }
-    
-    emptyCart = async(cid) => {
-        const carts = await this.getCarts();
-        const findCart = carts.find(cart => cart.cid === cid);
-        
-        findCart.products = []
-        carts.push(findCart);
-        
-        await fs.promises.writeFile(this.path, JSON.stringify(carts, null, 2))
 
-        return findCart;  
-    }
 }

@@ -5,7 +5,7 @@ import GitHubStrategy from 'passport-github2';
 import GoogleStrategy from 'passport-google-oauth2';
 import jwt from 'passport-jwt';
 // import User from '../dao/mongo/users.mongo.js';
-import { alertConfig, createHash, generateToken, validatePassword } from "../utils/index.js";
+import { createHash, generateToken, validatePassword } from "../utils/index.js";
 import UserModel from "../dao/mongo/models/users.model.js";
 import { UsersService, CartsService } from "../repository/index.js";
 
@@ -48,6 +48,7 @@ const initializePassport = () => {
                 documents: [],
                 password: createHash(password)
             }
+
             const result = await UsersService.createUser(newUser);
 
             if (result.email === 'adminCoder@coder.com' || result.email === 'm.christello@hotmail.com') {
@@ -60,7 +61,7 @@ const initializePassport = () => {
             return done(null, result)
 
         } catch (error) {
-            return done(`There's been an error trying to register: `, error)
+            return done(`There's been an error trying to register: `, error.message)
         }
     }))
 

@@ -46,30 +46,3 @@ addProductBtn.forEach(b => {
     })
 })
 
-
-// TODO ---> eliminar producto con boton.
-// const deleteProduct = async(pid) => {
-//     const response = await fetch(`/api/products/${pid}`, {
-//         method: 'DELETE',
-//         headers: {
-//             "Content-Type": "application/json"
-//         }
-//     });
-//     const result = await response.json();
-
-//     if(result.status === 'success') {
-//         Swal.fire({
-//             icon: 'success',
-//             title: 'Product deleted successfully',
-//             toast: true,
-//             position: 'top-right',
-//             timer: 1500,
-//             timerProgressBar: true
-//         })
-//     }
-// }
-
-// deleteProductBtn.addEventListener("click", () => {
-//     console.log(deleteBtn.value);
-// })
-

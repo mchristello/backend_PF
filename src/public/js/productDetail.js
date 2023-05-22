@@ -45,7 +45,6 @@ addProductBtn.addEventListener('click', () => {
 
 // DELETE product 
 deleteProductBtn.addEventListener('click', () => {
-    console.log(`debería ser el id del producto--> `, pid);
     deleteProductFromDB(pid)
 })
 

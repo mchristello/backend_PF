@@ -21,9 +21,7 @@ router.post('/:uid/documents', upload.fields([
     { name: 'documents', maxCount: 1 },
 ]), uploadDocs);
 
-// TODO: Terminar con la eliminación de usuarios inactivos
 router.get('/deleteInactiveUsers', authPolicies('admin'), deleteInactiveUsers)
-
 
 // Router for Testing Register & Login
 router.post('/register', passport.authenticate('register', { failureRedirect: '/users/error' }), registerApiPost);

@@ -41,12 +41,23 @@ export default class Products {
         return cart;
     }
 
-    createCart = () => {
-        
+    createCart = async() => {
+        const carts = await this.getCarts();
+        const id = await this.#getNextID(carts)
+        const newCart = {
+            id: id,
+            cart: []
+        }
+        console.log(`FROM CREATECART IN FILE`, newCart);
+        carts.push(newCart);
+
+        await fs.promises.writeFile(this.path, JSON.stringify(newCart, null, 2))
+
+        return newCart;
     }
 
     addProduct = async(data) => {
-        req.logger.debug(data);
+        console.log(data);
         const products = await this.get();
         const id = await this.#getNextID(products)
 

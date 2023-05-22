@@ -54,14 +54,10 @@ export default class Products {
 
     update = async (id, data) => {
         const updateProduct = await ProductModel.updateOne({ _id: id }, data);
-        req.logger.info(`The product ${updateProduct.description} has been updated`);
         return updateProduct;
     }
 
     deleteOne = async (id) => {
-        const product = await ProductModel.findOne({ _id: id });
-        console.log(`PRODUCT FROM DELETEONE IN PRODUCTS.MONGO ----> ${product}`)
-        console.log(`The product ${product.title} ${product.description} has been deleted`);
         const productToDelete = await ProductModel.deleteOne({ _id: id });
         return productToDelete;
     }

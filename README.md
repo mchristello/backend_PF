@@ -9,6 +9,7 @@
 <!-- TODO: Inser GIF DEMO -->
 ![Demo de la web page.](https://firebasestorage.googleapis.com/v0/b/padel-market-2259b.appspot.com/o/GIF_ecommerce.gif?alt=media&token=e17b26d7-5865-4c09-a11b-c331fd373d9d)
 
+-------------------------
 
 
 ## <u>Used Technologies:</u>
@@ -19,10 +20,12 @@
 - NodeJS
 - CRUD Op.
 - API Rest.
-- Swagger Documentation
 - Testing 
-- Custom Router
 - Custom Errors
+- Docker
+- Kubernetes & Minikube
+
+-------------------------
 
 ## <u>Framework Dependencies:</u>
 - Bootstrap
@@ -39,8 +42,10 @@
 - Winston
 - Nodemailer
 - @faker-js/faker
-- Swagger
+- Swagger Documentation
 - Testing: Chai; Mocha; Supertest
+
+-------------------------
 
 ## <u>Directories</u>
 - /src
@@ -59,16 +64,19 @@
     - carts
     - products
 
+-------------------------
+
 ## <u>API Endpoints</u>
 
-- "/api/products", brings all the products in the DB.
-- "/api/carts", brings all the carts existents in the DB.
-- "/api/users", brings the list of users of the DB. Only admin users
-- "/api/users/current", brings the current user logged in the website.
+- "/api/products", brings all the products in the DB. [Try it here.](localhost:8080/api/products)
+- "/api/carts", brings all the carts existents in the DB. [Try it here.](localhost:8080/api/carts)
+- "/api/users", brings the list of users of the DB. Only admin users. [Try it here.](localhost:8080/api/users)
+- "/api/users/current", brings the current user logged in the website. [Try it here.](localhost:8080/api/users/current)
 - "/api/logger", tests the Logger in the console.
 - "/api/mail"
 - "/api/mockingproducts", generate random users & products with @faker-js/faker.
 
+-------------------------
 
 ## <u>Available Scripts</u>
 
@@ -76,9 +84,16 @@
 
 2° Open [LocalHost](localhost:8080/home) here, to view it in your browser.
 
+OR  ---- > Visit -> [THIS](https://backendpf-production.up.railway.app/home) <- URL.
+
 -------------------------
 
-OR ---- > Visit [THIS](https://backendpf-production.up.railway.app/home) URL in your browser.
+## <u>Docker Info </u>
+
+ - Docker Hub: (https://hub.docker.com/repository/docker/matiaschristello/ecommerce/tags?page=1&ordering=last_updated)
+ - Pull Comand : docker pull matiaschristello/ecommerce:1.0.0
+
+-------------------------
 
 ## <u>Developer Profile</u>
 
