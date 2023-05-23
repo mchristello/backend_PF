@@ -1,6 +1,7 @@
 let deleteProductBtn = document.querySelectorAll('#delete_btn');
 let cartBtn = document.getElementById('purchase');
 let emptyCart = document.getElementById('empty_cart');
+let cid =  document.getElementById('purchase').value;
 
 // DELETE para eliminar producto del carrito
 
@@ -51,11 +52,10 @@ const deleteAllProducts = async(cid) =>{
     if(result.status === 'success') {
         Swal.fire({
             icon: 'warning',
-            title: 'All products has been deleted from cart. Please refresh!',
-            toast: true,
+            title: 'All products have been removed from the cart. Please, refresh the page!',
             position: 'center',
-            timer: 1500,
-            timerProgressBar: true
+            showConfirmButton: true,
+            confirmButtonText: 'Got it!'
         })
     }
 }

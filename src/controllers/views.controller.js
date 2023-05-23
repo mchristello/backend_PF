@@ -54,7 +54,7 @@ export const getProducts = async (req, res) => {
             const isAdmin = user.rol === 'admin' || user.rol === 'premium';
             
             return res.render('products/products', {
-                style: 'style.css',
+                // style: 'style.css',
                 result,
                 user,
                 isAdmin,
@@ -230,10 +230,10 @@ export const payment = async(req, res) => {
             html:   `<main class="container m-3 text-center" style='background-color: #B9CDDA;">
                         <h1 class="m-5">${user.first_name}, we appriciate your trust!</h1>
                         <br>
-                        <p class="m-5">Your ticket number is ${result.code}</p>
-                        <p class="m-5">Also, we let you know that this is a fictitious ecommerce store, where we do not sell real products. It's a project for CoderHouse's Backend course.</p>
-                        <p class="m-5">I hope that everything went well and that you haven't encountered major inconveniences while browsing the website</p>
-                        <p class="m-5">If you wanna keep looking the website, be my guest!!! Click <a href="https://backendpf-production.up.railway.app/home">here</a>!
+                        <p class="m-3">Your ticket number is ${result.code}</p>
+                        <p class="m-3">Also, we let you know that this is a fictitious ecommerce store, where we do not sell real products. It's a project for CoderHouse's Backend course.</p>
+                        <p class="m-3">I hope that everything went well and that you haven't encountered major inconveniences while browsing the website</p>
+                        <p class="m-3">If you wanna keep looking the website, be my guest!!! Click <a href="https://backendpf-production.up.railway.app/home">here</a>!
                     </main>`
         }
         await sendMail.send(mailOptions)
@@ -253,7 +253,7 @@ export const paymentGet = async(req, res) => {
         const ticket = await TicketModel.findOne({ purchaser: user._id }).lean()
         
         return res.render('products/payment', {
-            style: 'style.css',
+            // style: 'style.css',
             user,
             ticket
         })

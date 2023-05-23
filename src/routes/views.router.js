@@ -28,9 +28,9 @@ router.get('/carts/:cid', AuthMiddleware.isAuthenticated, cartById);
 router.get('/users/current', AuthMiddleware.isAuthenticated, userAccount)
 
 // Purchase de compra
+router.get('/carts/:cid/payment', AuthMiddleware.isAuthenticated, paymentGet)
 router.post('/carts/:cid/payment', AuthMiddleware.isAuthenticated, payment)
 
-router.get('/carts/:cid/payment', AuthMiddleware.isAuthenticated, paymentGet)
 
 // Update user info
 router.get('/users/updateInfo', AuthMiddleware.isAuthenticated, async(req, res) => {
