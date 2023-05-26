@@ -3,6 +3,8 @@ let cartBtn = document.getElementById('purchase');
 let emptyCart = document.getElementById('empty_cart');
 let cid =  document.getElementById('purchase').value;
 
+console.log(cid);
+
 // DELETE para eliminar producto del carrito
 
 deleteProductBtn.forEach((b) => {

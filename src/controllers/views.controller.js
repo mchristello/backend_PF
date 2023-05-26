@@ -236,6 +236,7 @@ export const payment = async(req, res) => {
                         <p class="m-3">If you wanna keep looking the website, be my guest!!! Click <a href="https://backendpf-production.up.railway.app/home">here</a>!
                     </main>`
         }
+        console.log(`MAILOPTIONS FROM PAYMENT--->`, mailOptions);
         await sendMail.send(mailOptions)
 
         return res.status(200).send({ status: 'success', payload: result })

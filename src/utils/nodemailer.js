@@ -17,6 +17,7 @@ export default class Mail {
     }
 
     send = async (options) => {
+        console.log(`OPTIONS FROM NODEMAILER`, options);
         const result = await this.transport.sendMail({
             from: config.TRANSPORT_USER,
             to: options.user,
