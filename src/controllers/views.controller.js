@@ -227,16 +227,15 @@ export const payment = async(req, res) => {
         const mailOptions = {
             user: `${user.email}`,
             subject: `Thanks for your purchase.`,
-            html:   `<main class="container m-3 text-center" style='background-color: #B9CDDA;">
-                        <h1 class="m-5">${user.first_name}, we appriciate your trust!</h1>
-                        <br>
-                        <p class="m-3">Your ticket number is ${result.code}</p>
-                        <p class="m-3">Also, we let you know that this is a fictitious ecommerce store, where we do not sell real products. It's a project for CoderHouse's Backend course.</p>
-                        <p class="m-3">I hope that everything went well and that you haven't encountered major inconveniences while browsing the website</p>
-                        <p class="m-3">If you wanna keep looking the website, be my guest!!! Click <a href="https://backendpf-production.up.railway.app/home">here</a>!
+            html:   `<main>
+                        <h1>${user.first_name}, we appriciate your trust!</h1>
+                        <h3>Your ticket number is ${result.code}</h3>
+                        <section>
+                            <p>Also, we let you know that this is a fictitious ecommerce store, where we do not sell real products. It's a project for CoderHouse's Backend course. I hope that everything went well and that you haven't encountered major inconveniences while browsing the website</p>
+                            <p>If you wanna keep looking the website, be my guest!!! Click <a href="https://backendpf-production.up.railway.app/home">here</a>!</p>
+                    </section>
                     </main>`
         }
-        console.log(`MAILOPTIONS FROM PAYMENT--->`, mailOptions);
         await sendMail.send(mailOptions)
 
         return res.status(200).send({ status: 'success', payload: result })

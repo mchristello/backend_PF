@@ -22,10 +22,10 @@ export const registerPost = async(req, res) => {
         if(!req.user) {
             return res.status(400)
         }
-        const mailOptions = {
+        const newAccountMail = {
             user: `${req.user.email}`,
             subject: `Thanks for registering.`,
-            html:   `<main class="container m-3 text-center" style="background-color: #B9CDDA; font-family: 'Roboto', sans-serif;">
+            html:   `<main class="container m-3 text-center" style="font-family: 'Roboto', sans-serif;">
                         <h1 class="m-5">Hi ${req.user.first_name}, welcome!!</h1>
                         <br>
                         <hr>
@@ -36,7 +36,7 @@ export const registerPost = async(req, res) => {
                         <p class="m-5">If you wanna keep looking the website, be my guest!!! Click <a href="${config.BASE_URL}/home">here</a>!
                     </main>`
         }
-        await sendMail.send(mailOptions)
+        await sendMail.send(newAccountMail)
 
         return res.status(200).redirect('/users/login');
     } catch (error) {
