@@ -90,6 +90,8 @@ export const loginPost = async(req, res) => {
 export const loginGitHub = async (req, res) => {
     try {
         req.session.user = req.user;
+        const updateUser = await UsersService.updateLastConnection(req.session.user._id)
+
         return res.status(200).redirect('/users/current');
     } catch (error) {
         req.logger.error(error)
@@ -100,6 +102,8 @@ export const loginGitHub = async (req, res) => {
 export const loginGoogle = async (req, res) => {
     try {
         req.session.user = req.user;
+        const updateUser = await UsersService.updateLastConnection(req.session.user._id)
+
         return res.status(200).redirect('/users/current');
     } catch (error) {
         req.logger.error(error)
@@ -169,7 +173,7 @@ export const errors = async (req, res) => {
             error: 'Session Error, try again later' 
         });
     } catch (error) {
-        req.logger.error(error)
+        req.logger.error(error.message)
         return res.status(400).send({ status: 'error', error: error.message });
     }
 }
@@ -178,7 +182,7 @@ export const getReset = async (req, res) => {
     try {
         return res.status(200).render('users/resetPassword', {
             style: 'style.css'
-        });
+        }); 
     } catch (error) {
         req.logger.error(error)
         return res.status(400).send({ status: 'error', error: error.message });

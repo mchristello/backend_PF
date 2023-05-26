@@ -171,3 +171,5 @@ error: Error in /products: Cannot read properties of undefined (reading 'toUpper
 error: Cannot read properties of undefined (reading '_id')
 error: Cannot read properties of undefined (reading '_id')
 error: Cannot read properties of undefined (reading '_id')
+error: El rol de admin no permite realizar acciones de compra.
+error: El rol de admin no permite realizar acciones de compra.

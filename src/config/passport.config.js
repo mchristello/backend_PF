@@ -61,6 +61,7 @@ const initializePassport = () => {
             return done(null, result)
 
         } catch (error) {
+            console.log(error);
             return done(`There's been an error trying to register: `, error.message)
         }
     }))
@@ -69,7 +70,7 @@ const initializePassport = () => {
     passport.use('github', new GitHubStrategy({
         clientID: config.GITHUB_CLIENT_ID,
         clientSecret: config.GITHUB_CLIENT_SECRET,
-        callbackURL: config.GITHUB_CALLBACKURL
+        callbackURL: config.GITHUB_CALLBACKURL_PRODUCTION
     },
     async(accessToken, refreshToken, profile, done) => {
         try {
@@ -84,11 +85,23 @@ const initializePassport = () => {
                 email: profile._json.email,
                 social: 'GitHub',
                 age: '',
-                password: "",
-                rol: (profile._json.email === 'adminCoder@coder.com' || 'm.christello@hotmail.com') ? 'admin' : 'user'
+                documents: [],
             }
 
             const result = await UsersService.createUser(newUser);
+            if (result.email === 'adminCoder@coder.com' || result.email === 'm.christello@hotmail.com') {
+                result.rol = 'admin'
+                await result.save();
+                return done(null, result);
+            }
+
+            if (result.cart === undefined) {
+                result.cart = await CartsService.createCart(),
+                await result.save();
+                return done(null, result);
+            }
+
+            await result.save();
             return done(null, result);
 
         } catch (error) {
@@ -100,7 +113,7 @@ const initializePassport = () => {
     passport.use('google', new GoogleStrategy({
         clientID: config.GOOGLE_CLIENT_ID,
         clientSecret: config.GOOGLE_CLIENT_SECRET,
-        callbackURL: config.GOOGLE_CALLBACKURL,
+        callbackURL: config.GOOGLE_CALLBACKURL_PRODUCTION,
         passReqToCallback: true
     },
     async(request, accessToken, refreshToken, profile, done) => {
@@ -117,13 +130,20 @@ const initializePassport = () => {
                 email: profile._json.email,
                 social: 'Google',
                 age: '',
-                password: "",
+                documents: [],
+                rol: 'user'
             }
 
             const result = await UsersService.createUser(newUser);
             
             if(result.email === 'adminCoder@coder.com' || result.email === 'm.christello@hotmail.com') {
                 result.rol = 'admin';
+                await result.save();
+                return done(null, result);
+            }
+            
+            if (result.cart === undefined) {
+                result.cart = await CartsService.createCart(),
                 await result.save();
                 return done(null, result);
             }
