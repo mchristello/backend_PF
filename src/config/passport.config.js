@@ -34,7 +34,7 @@ const initializePassport = () => {
         try {
             const user = await UsersService.getUser(username);
             if (user) {
-                alert(`Already exists a user with email ${username}`);
+                console.log(`Already exists a user with email ${username}`);
                 return done(null, user);
             }
 
@@ -172,9 +172,6 @@ const initializePassport = () => {
                 return done(null, false);
             }
 
-            const token = generateToken(user);
-            user.token = token;
-
             return done(null, user)
         } catch (error) {
             console.error(error)
@@ -184,12 +181,13 @@ const initializePassport = () => {
 
     // JWT Passport Strategy
     passport.use('jwt', new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
+        jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey: config.PRIVATE_KEY
     },
     async(jwt_payload, done) => {
         try {
-            return done(null, jwt_payload);
+            const user = jwt_payload
+            return done(null, user);
         } catch (error) {
             return done(error);
         }

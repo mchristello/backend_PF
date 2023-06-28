@@ -173,3 +173,33 @@ error: Cannot read properties of undefined (reading '_id')
 error: Cannot read properties of undefined (reading '_id')
 error: El rol de admin no permite realizar acciones de compra.
 error: El rol de admin no permite realizar acciones de compra.
+error: undefined
+error: undefined
+error: undefined
+error: IN LOGINPOST --->
+error: Cast to ObjectId failed for value "{thumbnail}" (type string) at path "_id" for model "products" at URL: /%7Bthumbnail%7D
+error: Cast to ObjectId failed for value "thumbnail" (type string) at path "_id" for model "products" at URL: /thumbnail
+error: Cast to ObjectId failed for value "{thumbnail}" (type string) at path "_id" for model "products" at URL: /%7Bthumbnail%7D
+error: Cast to ObjectId failed for value "getAllProducts" (type string) at path "_id" for model "products" at URL: /getAllProducts
+error: Cast to ObjectId failed for value "getAllProducts" (type string) at path "_id" for model "products" at URL: /getAllProducts
+error: Cast to ObjectId failed for value "getAll" (type string) at path "_id" for model "products" at URL: /getAll
+error: Cast to ObjectId failed for value "getAll" (type string) at path "_id" for model "products" at URL: /getAll
+error: Cast to ObjectId failed for value "getAllProducts" (type string) at path "_id" for model "products" at URL: /getAllProducts
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"{{this.product.thumbnail}}\"","value":"{{this.product.thumbnail}}","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"{{this.product.thumbnail}}\"","value":"{{this.product.thumbnail}}","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"{{this.product.thumbnail}}\"","value":"{{this.product.thumbnail}}","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"{{this.product.thumbnail}}\"","value":"{{this.product.thumbnail}}","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"imagen del producto\"","value":"imagen del producto","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"imagen del producto\"","value":"imagen del producto","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"imagen del producto\"","value":"imagen del producto","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"imagen del producto\"","value":"imagen del producto","valueType":"string"}
+error: Cannot read properties of undefined (reading 'rol')
+error: Cannot read properties of undefined (reading 'rol')
+error: Cannot read properties of undefined (reading 'rol')
+error: Cannot read properties of undefined (reading 'rol')
+error: Cannot read properties of undefined (reading 'rol')
+error: Cannot read properties of undefined (reading 'rol')
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}

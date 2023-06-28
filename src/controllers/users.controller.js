@@ -4,6 +4,7 @@ import ERRORS from '../repository/errors/enums.js';
 import { generateGeneralError, generateNotFoundError } from '../repository/errors/info.js';
 import { UsersService } from '../repository/index.js';
 import { sendMail } from '../utils/nodemailer.js';
+import { generateToken } from '../utils/utils.js';
 
 
 export const registerGet = async(req, res) => {
@@ -78,11 +79,16 @@ export const loginPost = async(req, res) => {
             last_connection: req.user.last_connection
         }
 
-        const updateUser = await UsersService.updateLastConnection(req.session.user._id)
+        const user = { ...req.session.user }
 
-        return res.cookie(config.COOKIE_NAME, req.user.token).redirect('/home');
+        const token = generateToken(user)
+        user.token = token;
+
+        const updateUser = await UsersService.updateLastConnection(user._id)
+
+        return res.cookie(config.COOKIE_NAME, req.user.token).send(user);
     } catch (error) {
-        req.logger.error(error)
+        console.log(`IN LOGINPOST --->`, error.message)
         return res.status(400).send({ status: 'error', error: error.message });
     }
 }
@@ -343,24 +349,25 @@ export const getAllUsers = async (req, res) => {
 
 export const getCurrentUser = async (req, res) => {
     try {
-            const user = req.session.user;
+        const user = req.user;
+    
+        if(!user) {
+            return res.status(401).send({ status: 'error', error: 'User not logged in' });
+        }
+        const getUser = await UsersService.getUser(user.email)
         
-            if(!user) {
-                return res.status(401).send({ status: 'error', error: 'User not logged in' });
-            }
-            const getUser = await UsersService.getUser(user.email)
-            
-            return res.send({ status: 'success', payload: getUser})
+        return res.send({ status: 'success', payload: getUser})
     } catch (error) {
         CustomError.createError({
             name: `User search error`,
             cause: generateGeneralError(error),
-            message: `Problem in ApiUsers, endpoint: ${req.url}.`,
+            message: `Problem in ApiUsers, endpoint: ${req.url}. ${req.method}.`,
             code: ERRORS.GENERAL_ERROR
         })
         return res.status(500).send({ status: 'error', error: error.message })
     }
 }
+
 
 export const deleteInactiveUsers = async(req, res) => {
     try {

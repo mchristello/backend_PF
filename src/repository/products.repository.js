@@ -10,6 +10,10 @@ export default class ProductRepository {
         return await this.dao.get(options, query)
     }
 
+    getAll = async () => {
+        return await this.dao.getAll();
+    }
+
     find = async(data) => {
         return await this.dao.find(data)
     }

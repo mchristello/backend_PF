@@ -4,12 +4,40 @@ import { sendMail } from '../utils/nodemailer.js';
 
 export const get = async(req, res) => {
     try {
-        const result = await ProductsService.get();
+        const { page, limit } = req.query;
+        const query = req.query?.query || req.body?.query || "";
+        const sort = req.query?.sort || req.body?.sort || "";
+
+        const options = {
+            page: page || 1,
+            limit: limit || 10,
+            sort: { price: sort || -1 },
+            lean: true
+        }
+
+        const sendQuery = query ? query[0].toUpperCase() + query.substring(1) : "";
+        const result = await ProductsService.get(options, sendQuery);
+
+        result.prevLink = result.hasPrevPage ? `/products?page=${result.prevPage}&limit=${result.limit}&query=${query || ""}&sort=${sort}` : "";
+        result.nextLink = result.hasNextPage ? `/products?page=${result.nextPage}&limit=${result.limit}&query=${query || ""}&sort=${sort}` : ""; 
+
+        result.isValid = !(page <= 0 || page > result.totalPages);
 
         return res.status(200).send({ status: 'success', payload: result });
     } catch (error) {
-        req.logger.error(error)
-        return res.status(400).send({ status: 'error', error: error.message });
+        req.logger.error(`${error.message} at URL: ${req.url}`)
+        return res.status(500).send({ status: 'error', error: error.message });
+    }
+}
+
+export const getAll = async(req, res) => {
+    try {
+        const result = await ProductsService.getAll();
+
+        return res.status(200).send({ status: 'success', payload: result });
+    } catch (error) {
+        req.logger.error(`${error.message} at URL: ${req.url}`)
+        return res.status(500).send({ status: 'error', error: error.message });
     }
 }
 
@@ -20,8 +48,8 @@ export const find = async(req, res) => {
         const result = await ProductsService.find(pid);
         return res.status(200).send({ status: 'success', payload: result });
     } catch (error) {
-        req.logger.error(error)
-        return res.status(400).send({ status: 'error', error: error.message });
+        req.logger.error(`${error.message} at URL: ${req.url}`)
+        return res.status(500).send({ status: 'error', error: error.message });
     }
 }
 
@@ -50,7 +78,7 @@ export const add = async (req, res) => {
 
         return res.status(200).send({ status: 'success', payload: result })
     } catch (error) {
-        req.logger.error(error.message)
+        req.logger.error(`${error.message} at URL: ${req.url}`)
         return res.status(500).send({ status: 'error', error: error.message });
     }
 }
@@ -65,8 +93,8 @@ export const update = async(req, res) => {
 
         return res.status(200).send({ status: 'success', payload: result });
     } catch (error) {
-        req.logger.error(error)
-        return res.status(400).send({ status: 'error', error: error.message });
+        req.logger.error(`${error.message} at URL: ${req.url}`)
+        return res.status(500).send({ status: 'error', error: error.message });
     }
 }
 
@@ -94,6 +122,6 @@ export const deleteOne = async(req, res) => {
         return res.status(200).send({ status: 'success', payload: result })
     } catch (error) {
         req.logger.error(`${error.message} at URL: ${req.url}`)
-        return res.status(400).send({ status: 'error', error: error.message });
+        return res.status(500).send({ status: 'error', error: error.message });
     }
 }

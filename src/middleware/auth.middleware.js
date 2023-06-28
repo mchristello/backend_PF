@@ -10,7 +10,8 @@ const isAuthenticated = (req, res, next) => {
 }
 
 const currentUser = (req, res, next) => {
-    if (req.session?.user) {
+    console.log(`FROM CURRENT USER ${req.user}`);
+    if (req.user) {
         return next();
     }
 

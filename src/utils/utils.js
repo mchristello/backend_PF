@@ -11,7 +11,6 @@ export const validatePassword = (user, password) => {
     return bcrypt.compareSync(password, user.password);
 }
 
-
 // Config JWT
 export const generateToken = (user) => {
     const token = jwt.sign({ user }, config.PRIVATE_KEY, { expiresIn: '24h' })
@@ -29,16 +28,18 @@ export const generateResetPasswordToken = (user) => {
 }
 
 export const authToken = (req, res, next) => {
-    const authToken = req.cookies.config.COOKIE_NAME
+    const userToken = req.headers['authorization']
 
-    if(!authToken) {
+    // console.log(`FROM AUTHTOKEN`, userToken);
+
+    if(!userToken) {
         return res.status(401).render('errors/general', {
             style: 'style.css',
             error: 'No Authentication.'
         });
     }
 
-    jwt.verify(token, config.PRIVATE_KEY, (error, credentials) => {
+    jwt.verify(userToken.split(" ")[1], config.PRIVATE_KEY, (error, credentials) => {
         if(error) {
             return res.status(403).render('errors/general', {
                 style: 'style.css',

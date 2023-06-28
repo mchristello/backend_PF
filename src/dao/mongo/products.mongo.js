@@ -34,6 +34,19 @@ export default class Products {
         return products;
     }
 
+    getAll = async () => {
+        const products = await ProductModel.find();
+        if (!products) {
+            CustomError.createError({
+                name: `Product search error`,
+                cause: generateNotFoundError(),
+                message: `There are no products in the DB.`,
+                code: ERRORS.NOT_FOUND_ERROR
+            })
+        }
+        return products
+    }
+
     find = async (data) => {
         const filteredProducts = await ProductModel.find({ _id: data }).lean().exec();
         if (!filteredProducts) {

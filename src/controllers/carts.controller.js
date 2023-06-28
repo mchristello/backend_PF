@@ -21,6 +21,7 @@ export const getCartById = async(req, res) => {
         const cid = req.params.cid;
 
         const result = await CartsService.getCartById(cid);
+        
         if (result === undefined) {
             CustomError.createError({
                 name: `Cart search error`,
@@ -54,7 +55,7 @@ export const addProduct = async(req, res) => {
     try {
         const cid = req.params.cid;
         const pid = req.params.pid;
-        const user = req.session.user;
+        const user = req.user;
 
         const product = await ProductModel.findOne({ _id: pid })
         if(product.stock === 0) {

@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { deleteInactiveUsers, getAllUsers, getCurrentUser, loginApiPost, modifyRol, registerApiPost, uploadDocs } from '../controllers/users.controller.js';
-import { AuthMiddleware } from '../middleware/auth.middleware.js';
-import { authPolicies } from '../utils/utils.js';
+import { authPolicies, authToken } from '../utils/utils.js';
 import upload from '../utils/multer.js';
 import passport from 'passport';
 
@@ -11,7 +10,7 @@ const router = Router();
 
 router.get('/', getAllUsers)
 
-router.get('/current', AuthMiddleware.currentUser, getCurrentUser)
+router.get('/current', authToken, getCurrentUser)
 
 router.get("/premium/:uid", modifyRol);
 
