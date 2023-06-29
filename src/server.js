@@ -32,10 +32,7 @@ const app = express();
 const httpServer = app.listen(config.PORT, console.log(`Server up & running on port ${config.PORT}`));
 
 
-app.use(cors({
-    "origin": true,
-    "methods": "GET,HEAD,PUT,POST,DELETE"
-}))
+app.use(cors())
 app.use(addLogger)
 app.use(errorHandler)
 app.use('/apiDocs', swaggerUiExpress.serve, swaggerUiExpress.setup(initSwagger()))
