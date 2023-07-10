@@ -324,6 +324,7 @@ export const getAllUsers = async (req, res) => {
         const dataToShow = []
         users.forEach(u => {
             const user = {
+                _id: u._id,
                 first_name: u.first_name,
                 last_name: u.last_name,
                 email: u.email,
