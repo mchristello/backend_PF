@@ -53,4 +53,8 @@ export default class CartRepository {
         return this.dao.deleteInactiveUsers(hs)
     }
 
+    deteleUser = async (uid) => {
+        return this.dao.deteleUser(uid)
+    }
+
 }

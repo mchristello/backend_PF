@@ -27,4 +27,6 @@ router.post('/register', passport.authenticate('register', { failureRedirect: '/
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/users/error' }), loginApiPost)
 
+router.delete('/:uid', authPolicies('admin'), deleteUser)
+
 export default router;

@@ -34,7 +34,7 @@ export const registerPost = async(req, res) => {
                         <p class="m-5">I want to let you know that this is a fictitious ecommerce store, where we do not sell real products. It's a project for CoderHouse's Backend course.</p>
                         <p>I hope that you find everything that you're looking for!</p>
                         <hr>
-                        <p class="m-5">If you wanna keep looking the website, be my guest!!! Click <a href="${config.BASE_URL}/home">here</a>!
+                        <p class="m-5">If you wanna keep looking the website, be my guest!!! Click <a href="${config.BASE_URL}/">here</a>!
                     </main>`
         }
         await sendMail.send(newAccountMail)
@@ -368,7 +368,6 @@ export const getCurrentUser = async (req, res) => {
     }
 }
 
-
 export const deleteInactiveUsers = async(req, res) => {
     try {
         const session = req.session.user;
@@ -383,6 +382,25 @@ export const deleteInactiveUsers = async(req, res) => {
         }
         
         return res.status(200).send({ status: 'success', message: `${result.deletedCount} inactive users deleted.` })
+    } catch (error) {
+        CustomError.createError({
+            name: `User search error`,
+            cause: generateGeneralError(error),
+            message: `Problem in ApiUsers, endpoint: ${req.url}.`,
+            code: ERRORS.GENERAL_ERROR
+        })
+        return res.status(500).send({ status: 'error', error: error.message })
+    }
+}
+
+export const deleteUser = async (req, res) => {
+    try {
+        const uid = req.params.uid;
+        const userToDelete = await UsersService.getById(uid);
+
+        const result = await UsersService.deteleUser(uid);
+
+        return res.status(200).send({ status: 'success', message: `The user has been deleted`, payload: userToDelete })
     } catch (error) {
         CustomError.createError({
             name: `User search error`,

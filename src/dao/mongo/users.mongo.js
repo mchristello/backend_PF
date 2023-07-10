@@ -223,4 +223,9 @@ export default class Users {
         const result = await UserModel.deleteMany({ last_connection: { $gt: hs } });
         return result
     }
+
+    deteleUser = async (uid) => {
+        const result = await UserModel.deleteOne({ _id: uid })
+        return result
+    }
 }
