@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { deleteInactiveUsers, getAllUsers, getCurrentUser, loginApiPost, modifyRol, registerApiPost, uploadDocs } from '../controllers/users.controller.js';
+import { deleteInactiveUsers, deleteUser, getAllUsers, getCurrentUser, loginApiPost, modifyRol, registerApiPost, uploadDocs } from '../controllers/users.controller.js';
 import { authPolicies, authToken } from '../utils/utils.js';
 import upload from '../utils/multer.js';
 import passport from 'passport';
