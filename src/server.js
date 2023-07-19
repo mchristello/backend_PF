@@ -41,11 +41,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(cookieParser(config.COOKIE_SECRET))
 
-// Handlebars
-app.engine('handlebars', handlebars.engine());
-app.set('views', __dirname + '/views');
-app.set('view engine', 'handlebars');
-
 // Session
 app.use(session({
     store: MongoStore.create({
@@ -55,11 +50,11 @@ app.use(session({
             useNewUrlParser: true,
             useUnifiedTopology: true
         },
-        ttl: 10000
+        ttl: 100
     }),
     secret: 'S@nsa2018',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
 }));
 
 // Passport

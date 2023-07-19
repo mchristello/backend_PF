@@ -182,7 +182,7 @@ const initializePassport = () => {
     // JWT Passport Strategy
     passport.use('jwt', new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey: config.PRIVATE_KEY
+        secretOrKey: config.JWT_PASS_TOKEN
     },
     async(jwt_payload, done) => {
         try {

@@ -48,7 +48,6 @@ export default class Products {
             id: id,
             cart: []
         }
-        console.log(`FROM CREATECART IN FILE`, newCart);
         carts.push(newCart);
 
         await fs.promises.writeFile(this.path, JSON.stringify(newCart, null, 2))
@@ -57,7 +56,6 @@ export default class Products {
     }
 
     addProduct = async(data) => {
-        console.log(data);
         const products = await this.get();
         const id = await this.#getNextID(products)
 

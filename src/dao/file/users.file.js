@@ -73,7 +73,6 @@ export default class Products {
             cart: data.cart,
             documents: data.documents,
         }
-        console.log(newUser);
 
         users.push(newUser)
         await fs.promises.writeFile(this.path, JSON.stringify(users, null, 2))

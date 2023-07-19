@@ -42,7 +42,6 @@ export default class Products {
     }
 
     add = async(data) => {
-        console.log(data);
         const products = await this.get();
         const id = await this.#getNextID(products)
 

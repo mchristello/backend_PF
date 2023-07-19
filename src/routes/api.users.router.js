@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { deleteInactiveUsers, deleteUser, getAllUsers, getCurrentUser, loginApiPost, modifyRol, registerApiPost, uploadDocs } from '../controllers/users.controller.js';
+import { deleteInactiveUsers, deleteUser, getAllUsers, getCurrentUser, loginApiPost, modifyRol, registerApiPost, updateInfo, uploadDocs } from '../controllers/users.controller.js';
 import { authPolicies, authToken } from '../utils/utils.js';
 import upload from '../utils/multer.js';
 import passport from 'passport';
@@ -25,8 +25,12 @@ router.get('/deleteInactiveUsers', authPolicies('admin'), deleteInactiveUsers)
 // Router for Testing Register & Login
 router.post('/register', passport.authenticate('register', { failureRedirect: '/users/error' }), registerApiPost);
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/users/error' }), loginApiPost)
+router.post('/login', passport.authenticate('local', { failureRedirect: '/users/error' }), loginApiPost);
 
-router.delete('/:uid', authPolicies('admin'), deleteUser)
+router.post('/users/updateInfo', authToken, updateInfo);
+
+router.post('')
+
+router.delete('/:uid', authToken, authPolicies('admin'), deleteUser);
 
 export default router;

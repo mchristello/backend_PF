@@ -88,8 +88,7 @@ export const loginPost = async(req, res) => {
 
         return res.cookie(config.COOKIE_NAME, req.user.token).send(user);
     } catch (error) {
-        console.log(`IN LOGINPOST --->`, error.message)
-        return res.status(400).send({ status: 'error', error: error.message });
+        return res.status(400).send({ status: 'error', error: error.message, location: `LOGIN POST` });
     }
 }
 
@@ -291,6 +290,34 @@ export const modifyRol = async (req, res) => {
     }
 }
 
+export const updateInfo = async (req, res) => {
+    try {
+        const user = req.session.user;
+        const body = req.body;
+    
+        const updateUser = {
+            first_name: body.first_name || user.first_name,
+            last_name: body.last_name || user.last_name,
+            email: body.email || user.email,
+            rol: body.rol || user.rol,
+            age: body.age || user.age,
+        }
+
+        console.log({updateUser});
+
+        // const update = await UserModel.updateOne({ _id: user._id }, updateUser)
+        // const newUser = await UsersService.getById(user._id)
+
+        return res.status(200).redirect('/users/current')
+    } catch (error) {
+        req.logger.error(`Error un updateInfo: ${error}, endopoint: ${req.url}`)
+        return res.status(500).render('errors/general', { 
+            style: 'style.css',
+            error: error.message
+        })
+    }
+}
+
 export const uploadDocs = async (req, res) => {
     try {
         const { uid } = req.params
@@ -399,7 +426,7 @@ export const deleteUser = async (req, res) => {
         const uid = req.params.uid;
         const userToDelete = await UsersService.getById(uid);
 
-        const result = await UsersService.deteleUser(uid);
+        // const result = await UsersService.deteleUser(uid);
 
         return res.status(200).send({ status: 'success', message: `The user has been deleted`, payload: userToDelete })
     } catch (error) {
